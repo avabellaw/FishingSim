@@ -13,7 +13,32 @@ public class Tile extends Entity {
 	@Override
 	public void update() {
 		// TODO Auto-generated method stub
-		
+
+	}
+
+	public static class defaultTile extends Tile {
+
+		public defaultTile(int x, int y, int tileSize) {
+			super(x, y, tileSize, tileSize, null);
+
+			outlineTile(tileSize);
+		}
+
+		private void outlineTile(int tileSize) {
+			int outlineColour = 0xcc12aa;
+			for (int i = 0; i < width; i++) {
+				pixels[i] = outlineColour;
+				pixels[i + (height - 1) * tileSize] = outlineColour;
+			}
+			for (int i = 0; i < height; i++) {
+				pixels[width - 1 + i * height] = outlineColour;
+				pixels[i * height] = outlineColour;
+			}
+			pixels[0] = 0x000000;
+			pixels[0 + (height - 1) * tileSize] = 0x39CCBA;
+			pixels[width - 1 + (height - 1) * tileSize] = 0xCC1420;
+			pixels[width - 1] = 0xFAFF00;
+		}
 	}
 
 }

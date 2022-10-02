@@ -14,8 +14,12 @@ public class Board extends BoardTemplate {
 
 	public Board(Dimension boardSize, int tileSize, Display display) {
 		super(boardSize, tileSize, display);
-
-		tiles.add(new Tile(0, 0, 16, 16, null));
+		
+		for(int y = 0; y < BOARD_SIZE.height; y+= TILE_SIZE) {
+			for(int x = 0; x < BOARD_SIZE.width; x+= TILE_SIZE) {
+				tiles.add(new Tile.defaultTile(x, y, tileSize));
+			}
+		}
 
 		entities.addAll(tiles);
 	}
