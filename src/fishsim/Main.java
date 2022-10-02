@@ -15,7 +15,7 @@ public class Main extends Component {
 	
 	
 	Display display = new GameDisplay(new Dimension(WIDTH, HEIGHT), 3, "Fishing Simulator !");
-	Board board = new Board(DIMENSIONS, 10, display);
+	Board board = new Board(DIMENSIONS, 5, display); //when set to 4 it breaks? 3 works fine...
 	Ticker ticker = new Ticker(this, display);
 	
 	public Main() {
