@@ -3,7 +3,6 @@ package fishsim.graphics;
 import java.awt.Dimension;
 
 import engine.core.graphics.Display;
-import engine.core.main.Component;
 
 public class GameDisplay extends Display {
 

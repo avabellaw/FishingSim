@@ -17,23 +17,36 @@ public class Board extends BoardTemplate {
 	public Board(Dimension boardSize, int tileSize, Display display) {
 		super(boardSize, tileSize, display);
 		map = new TempMap(this);
-		
+		addMapToBoard(map.map);
+
+		entities.addAll(tiles);
+	}
+	
+	public void addMapToBoard(utilities.TempMap.Tile[][] map) {
 		for(int y = 0; y < BOARD_SIZE.height; y+= TILE_SIZE) {
 			for(int x = 0; x < BOARD_SIZE.width; x+= TILE_SIZE) {
-				utilities.TempMap.Tile tileType = map.map[x/TILE_SIZE][y/TILE_SIZE];
+				utilities.TempMap.Tile tileType = this.map.map[x/TILE_SIZE][y/TILE_SIZE];
 				
 				switch (tileType) {
 				case VoidTile :
-					tiles.add(new Tile.voidTile(x, y, tileSize));
+					tiles.add(new Tile.voidTile(x, y, TILE_SIZE));
 					break;
 				case GroundTile :
-					tiles.add(new Tile.groundTile(x, y, tileSize));
+					tiles.add(new Tile.groundTile(x, y, TILE_SIZE));
 					break;
+				case WaterTile :
+					tiles.add(new Tile.waterTile(x, y, TILE_SIZE));
+					break;
+				case AirTile :
+					tiles.add(new Tile.airTile(x, y, TILE_SIZE));
+					break;
+				case DefaultTile :
+					tiles.add(new Tile.defaultTile(x, y, TILE_SIZE));
+					break;
+					
 				}
 			}
 		}
-
-		entities.addAll(tiles);
 	}
 
 }
