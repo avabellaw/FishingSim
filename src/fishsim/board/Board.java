@@ -4,23 +4,18 @@ import java.awt.Dimension;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.omg.CORBA.BAD_INV_ORDER;
-
 import engine.BoardTemplate;
 import engine.core.graphics.Display;
-import engine.entity.Entity;
 import engine.graphics.sprites.Sprite;
 import engine.graphics.sprites.Spritesheet;
 import fishsim.entities.Fisher;
 import fishsim.entities.Tile;
+import fishsim.graphics.StaticSprites;
 
 public class Board extends BoardTemplate {
 
 	public List<Tile> tiles = new ArrayList<Tile>(); // Just tiletypes
 	private int[] boardPixels;
-	private Spritesheet blueprintSpritesheet = new Spritesheet("res/sprites/BoardBlueprint.png", 300, 150);
-	private Sprite blueprintSprite = new Sprite(0, 0, 150, 150, blueprintSpritesheet);
-	private Sprite gameBlueprintSprite = new Sprite(150, 0, 150, 150, blueprintSpritesheet);
 
 	public enum TileType {
 		VoidTile, GroundTile, WaterTile,
@@ -30,15 +25,16 @@ public class Board extends BoardTemplate {
 		super(boardSize, 1, display);
 
 		boardPixels = new int[boardSize.width * boardSize.height * TILE_SIZE];
-		
-		int playerX = 100, playerY = 55;
-		player = new Fisher(playerX, playerY, this);
 
-		addMapToBoard();
+		int playerX = 100, playerY = 55;
+		new Fisher(playerX, playerY, this); // Fisher player new Fisher(...)
+
+		addMapToBoard(StaticSprites.blueprintSprite);
 	}
 
-	public void addMapToBoard() {
+	public void addMapToBoard(Sprite blueprintSprite) {
 		int[] pixels = blueprintSprite.getSprite();
+		tiles.clear();
 
 		for (int y = 0; y < blueprintSprite.getHeight(); y += TILE_SIZE) {
 			for (int x = 0; x < blueprintSprite.getWidth(); x += TILE_SIZE) {
