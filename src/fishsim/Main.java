@@ -6,16 +6,19 @@ import engine.core.Ticker;
 import engine.core.graphics.Display;
 import engine.core.main.Component;
 import fishsim.board.Board;
+import fishsim.board.GameBoard;
 import fishsim.graphics.GameDisplay;
+import fishsim.graphics.StaticSprites;
 
 public class Main extends Component {
 
-	private final int WIDTH = 150, HEIGHT = 150;
-	public final Dimension DIMENSIONS = new Dimension(WIDTH, HEIGHT); 
+	private final static int WIDTH = 150, HEIGHT = 150;
+	public final static Dimension DIMENSIONS = new Dimension(WIDTH, HEIGHT); 
 	
 	
-	Display display = new GameDisplay(new Dimension(WIDTH, HEIGHT), 3, "Fishing Simulator !");
-	Board board = new Board(DIMENSIONS, display); //when set to 4 it breaks? 3 works fine...
+	static Display display = new GameDisplay(new Dimension(WIDTH, HEIGHT), 3, "Fishing Simulator !");
+	static Board board = new Board(DIMENSIONS, display, StaticSprites.blueprintSprite); //when set to 4 it breaks? 3 works fine...
+	public static GameBoard gameBoard = new GameBoard(DIMENSIONS, display); 
 	Ticker ticker = new Ticker(this, display);
 	
 	public Main() {
@@ -24,6 +27,11 @@ public class Main extends Component {
 	
 	public static void main(String[] args) {
 		new Main();
+	}
+	
+	public static void swapBoard(Board newBoard) {
+		board = newBoard;
+		board.removeEntities();
 	}
 	
 	@Override

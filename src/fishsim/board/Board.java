@@ -16,20 +16,26 @@ public class Board extends BoardTemplate {
 
 	public List<Tile> tiles = new ArrayList<Tile>(); // Just tiletypes
 	private int[] boardPixels;
+	
+	private Fisher player;
 
 	public enum TileType {
 		VoidTile, GroundTile, WaterTile,
 	}
 
-	public Board(Dimension boardSize, Display display) {
+	public Board(Dimension boardSize, Display display, Sprite blueprintSprite) {
 		super(boardSize, 1, display);
 
 		boardPixels = new int[boardSize.width * boardSize.height * TILE_SIZE];
 
 		int playerX = 100, playerY = 55;
-		new Fisher(playerX, playerY, this); // Fisher player new Fisher(...)
+		player = new Fisher(playerX, playerY, this); // Fisher player new Fisher(...)
 
-		addMapToBoard(StaticSprites.blueprintSprite);
+		addMapToBoard(blueprintSprite);
+	}
+	
+	public void removeEntities() {
+		entities.clear();
 	}
 
 	public void addMapToBoard(Sprite blueprintSprite) {

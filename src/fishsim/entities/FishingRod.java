@@ -6,7 +6,9 @@ import javax.swing.plaf.synth.SynthSeparatorUI;
 
 import engine.core.graphics.Display;
 import engine.entity.Entity;
+import fishsim.Main;
 import fishsim.board.Board;
+import fishsim.board.GameBoard;
 import fishsim.graphics.StaticSprites;
 
 public class FishingRod extends Entity {
@@ -72,7 +74,19 @@ public class FishingRod extends Entity {
 				int pixel = StaticSprites.splashSprite.getSprite()[i];
 					pixels[i] = pixel;
 			}
-			board.addMapToBoard(StaticSprites.gameBlueprintSprite);
+			
+			new Thread() {
+				public void run() {
+					try {
+						Thread.sleep(100);
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					
+					Main.swapBoard(Main.gameBoard);
+				}
+			}.start();
 		}
 
 		private void throwHook(double speed) {
@@ -89,13 +103,13 @@ public class FishingRod extends Entity {
 			hook.ySpeed = speed * Math.sin(angle * (Math.PI / 180));
 		}
 
-		private double getRange() {
-			return (Math.pow(U, 2) * Math.sin(2 * angle)) / 9.8;
-		}
-
-		private double getEndTimeOfFlight() {
-			return ((2 * U * Math.sin(angle))) / 9.8;
-		}
+//		private double getRange() {
+//			return (Math.pow(U, 2) * Math.sin(2 * angle)) / 9.8;
+//		}
+//
+//		private double getEndTimeOfFlight() {
+//			return ((2 * U * Math.sin(angle))) / 9.8;
+//		}
 
 		@Override
 		public void update() {
