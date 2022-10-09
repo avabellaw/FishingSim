@@ -61,10 +61,6 @@ public class Board extends BoardTemplate {
 			}
 		}
 	}
-	
-	public void addToBoardPixels(int x, int y, int colour) {
-		boardPixels[x +  y * BOARD_SIZE.width] = colour;
- 	}
 
 	@Override
 	public void render() {

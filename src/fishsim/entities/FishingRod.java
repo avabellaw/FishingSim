@@ -5,15 +5,18 @@ import java.awt.Color;
 import engine.core.graphics.Display;
 import engine.entity.Entity;
 import fishsim.board.Board;
+import fishsim.graphics.StaticSprites;
 
 public class FishingRod extends Entity {
 
 	public FishingHook hook;
 	public FishingLine line;
 	public Fisher player;
+	
+	public static final int WIDTH = 4, HEIGHT = 8;
 
 	public FishingRod(int x, int y, Board board, Fisher player) {
-		super(x - 2, y - 2, 2, 10);
+		super(x - 2, y - 2, WIDTH, HEIGHT, StaticSprites.fishingRodSprite);
 
 		this.hook = new FishingHook(this.x, this.y - height, board, 10);
 		this.player = player;
@@ -48,7 +51,7 @@ public class FishingRod extends Entity {
 		int minS = 87, maxS = 9;
 
 		public FishingHook(int x, int y, Board board, double angle) {
-			super(x, y, 2, 2);
+			super(x, y, 4, 8, StaticSprites.hookSprite);
 			this.angle = angle;
 			this.board = board;
 
