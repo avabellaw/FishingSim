@@ -4,6 +4,8 @@ import java.awt.Dimension;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.omg.CORBA.BAD_INV_ORDER;
+
 import engine.BoardTemplate;
 import engine.core.graphics.Display;
 import engine.entity.Entity;
@@ -59,6 +61,10 @@ public class Board extends BoardTemplate {
 			}
 		}
 	}
+	
+	public void addToBoardPixels(int x, int y, int colour) {
+		boardPixels[x +  y * BOARD_SIZE.width] = colour;
+ 	}
 
 	@Override
 	public void render() {
