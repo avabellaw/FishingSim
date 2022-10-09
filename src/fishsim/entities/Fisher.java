@@ -6,11 +6,13 @@ import fishsim.board.Board;
 public class Fisher extends Entity {
 
 	private FishingRod rod;
+	
+	public static int width = 5, height = 8;
 
 	public Fisher(int x, int y, Board board) {
-		super(x, y, 5, 8);
+		super(x, y, width, height);
 
-		rod = new FishingRod(x, y, board, this);
+		rod = new FishingRod(x, y + height, board, this);
 
 		board.entities.add(this);
 		board.entities.add(rod);
