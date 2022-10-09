@@ -65,8 +65,6 @@ public class FishingRod extends Entity {
 
 			minU = Math.sqrt((minS * 9.8) / Math.sin(2 * angle));
 			maxU = Math.sqrt((maxS * 9.8) / Math.sin(2 * angle));
-
-			System.out.println(minU + " that's minU this is maxU: " + maxU);
 		}
 		
 		public void splash() {
@@ -78,13 +76,13 @@ public class FishingRod extends Entity {
 			new Thread() {
 				public void run() {
 					try {
-						Thread.sleep(100);
+						Thread.sleep(200);
+						Main.swapBoard(Main.gameBoard);
 					} catch (InterruptedException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
 					
-					Main.swapBoard(Main.gameBoard);
 				}
 			}.start();
 		}

@@ -7,17 +7,17 @@ import java.util.List;
 import engine.BoardTemplate;
 import engine.core.graphics.Display;
 import engine.graphics.sprites.Sprite;
-import engine.graphics.sprites.Spritesheet;
 import fishsim.entities.Fisher;
 import fishsim.entities.Tile;
-import fishsim.graphics.StaticSprites;
 
-public class Board extends BoardTemplate {
+public abstract class Board extends BoardTemplate {
 
 	public List<Tile> tiles = new ArrayList<Tile>(); // Just tiletypes
-	private int[] boardPixels;
-	
-	private Fisher player;
+	protected int[] boardPixels;
+
+	protected Sprite blueprint;
+
+	protected Fisher player;
 
 	public enum TileType {
 		VoidTile, GroundTile, WaterTile,
@@ -26,19 +26,15 @@ public class Board extends BoardTemplate {
 	public Board(Dimension boardSize, Display display, Sprite blueprintSprite) {
 		super(boardSize, 1, display);
 
+		this.blueprint = blueprintSprite;
+
 		boardPixels = new int[boardSize.width * boardSize.height * TILE_SIZE];
 
-		int playerX = 100, playerY = 55;
-		player = new Fisher(playerX, playerY, this); // Fisher player new Fisher(...)
-
-		addMapToBoard(blueprintSprite);
-	}
-	
-	public void removeEntities() {
-		entities.clear();
+		addMapToBoard();
 	}
 
-	public void addMapToBoard(Sprite blueprintSprite) {
+	public void addMapToBoard() {
+		Sprite blueprintSprite = this.blueprint;
 		int[] pixels = blueprintSprite.getSprite();
 		tiles.clear();
 
