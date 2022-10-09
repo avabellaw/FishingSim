@@ -68,12 +68,11 @@ public class FishingRod extends Entity {
 		}
 		
 		public void splash() {
-			System.out.println("splash");
 			for(int i = 0; i < pixels.length; i ++) {
 				int pixel = StaticSprites.splashSprite.getSprite()[i];
-				
 					pixels[i] = pixel;
 			}
+			board.addMapToBoard(StaticSprites.gameBlueprintSprite);
 		}
 
 		private void throwHook(double speed) {
