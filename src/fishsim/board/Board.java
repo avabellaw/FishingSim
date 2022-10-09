@@ -18,10 +18,9 @@ public class Board extends BoardTemplate {
 
 	public List<Tile> tiles = new ArrayList<Tile>(); // Just tiletypes
 	private int[] boardPixels;
-	private Spritesheet blueprintSpritesheet = new Spritesheet("res/sprites/BoardBlueprint.png", 150, 150);
+	private Spritesheet blueprintSpritesheet = new Spritesheet("res/sprites/BoardBlueprint.png", 300, 150);
 	private Sprite blueprintSprite = new Sprite(0, 0, 150, 150, blueprintSpritesheet);
-
-	private Fisher player;
+	private Sprite gameBlueprintSprite = new Sprite(150, 0, 150, 150, blueprintSpritesheet);
 
 	public enum TileType {
 		VoidTile, GroundTile, WaterTile,
