@@ -6,46 +6,68 @@ import java.util.List;
 
 import engine.BoardTemplate;
 import engine.core.graphics.Display;
+import engine.entity.Entity;
+import engine.graphics.sprites.Sprite;
+import engine.graphics.sprites.Spritesheet;
+import fishsim.entities.Fisher;
 import fishsim.entities.Tile;
-import utilities.TempMap;;
 
 public class Board extends BoardTemplate {
 
-	private List<Tile> tiles = new ArrayList<Tile>();
-	private TempMap map;
+	public List<Tile> tiles = new ArrayList<Tile>(); // Just tiletypes
+	private int[] boardPixels;
+	private Spritesheet blueprintSpritesheet = new Spritesheet("res/sprites/BoardBlueprint.png", 150, 150);
+	private Sprite blueprintSprite = new Sprite(0, 0, 150, 150, blueprintSpritesheet);
 
-	public Board(Dimension boardSize, int tileSize, Display display) {
-		super(boardSize, tileSize, display);
-		map = new TempMap(this);
-		addMapToBoard(map.map);
+	private Fisher player;
 
-		entities.addAll(tiles);
+	public enum TileType {
+		VoidTile, GroundTile, WaterTile,
 	}
-	
-	public void addMapToBoard(utilities.TempMap.Tile[][] map) {
-		for(int y = 0; y < BOARD_SIZE.height; y+= TILE_SIZE) {
-			for(int x = 0; x < BOARD_SIZE.width; x+= TILE_SIZE) {
-				utilities.TempMap.Tile tileType = this.map.map[x/TILE_SIZE][y/TILE_SIZE];
-				
-				switch (tileType) {
-				case VoidTile :
-					tiles.add(new Tile.voidTile(x, y, TILE_SIZE));
-					break;
-				case GroundTile :
-					tiles.add(new Tile.groundTile(x, y, TILE_SIZE));
-					break;
-				case WaterTile :
-					tiles.add(new Tile.waterTile(x, y, TILE_SIZE));
-					break;
-				case AirTile :
+
+	public Board(Dimension boardSize, Display display) {
+		super(boardSize, 1, display);
+
+		boardPixels = new int[boardSize.width * boardSize.height * TILE_SIZE];
+		
+		int playerX = 100, playerY = 55;
+		player = new Fisher(playerX, playerY, this);
+
+		addMapToBoard();
+	}
+
+	public void addMapToBoard() {
+		int[] pixels = blueprintSprite.getSprite();
+
+		for (int y = 0; y < blueprintSprite.getHeight(); y += TILE_SIZE) {
+			for (int x = 0; x < blueprintSprite.getWidth(); x += TILE_SIZE) {
+				int pixel = pixels[x + y * blueprintSprite.getWidth()];
+
+				switch (pixel) {
+				case Tile.airTile.DEFAULT_COLOUR: // White colour - air
 					tiles.add(new Tile.airTile(x, y, TILE_SIZE));
 					break;
-				case DefaultTile :
-					tiles.add(new Tile.defaultTile(x, y, TILE_SIZE));
+				case Tile.waterTile.DEFAULT_COLOUR: // Blue colour - water
+					tiles.add(new Tile.waterTile(x, y, TILE_SIZE));
 					break;
-					
+				case Tile.groundTile.DEFAULT_COLOUR: // Brown colour - earth
+					tiles.add(new Tile.groundTile(x, y, TILE_SIZE));
+					break;
 				}
+
+				boardPixels[x + y * blueprintSprite.getWidth()] = pixel;
 			}
+		}
+	}
+
+	@Override
+	public void render() {
+		for (int i = 0; i < boardPixels.length; i++) {
+			display.pixels[i] = boardPixels[i];
+		}
+
+		for (int i = 0; i < entities.size(); i++) {
+			entities.get(i).render(display);
 		}
 	}
 
