@@ -19,10 +19,24 @@ public class FishingRod extends Entity {
 
 	public static final int WIDTH = 9, HEIGHT = 20;
 
-	public FishingRod(int x, int y, Board board, Fisher player) {
-		super(x - WIDTH, y - HEIGHT, WIDTH, HEIGHT, StaticSprites.fishingRodSprite);
+	private double minU, maxU, angle, U;
+	int minS = 87, maxS = 40;
+	
+	private Board board;
 
-		this.hook = new FishingHook(this.x, this.y, board, 45);
+	public FishingRod(int x, int y, Board board, Fisher player, double angle) {
+		super(x - WIDTH, y - HEIGHT, WIDTH, HEIGHT, StaticSprites.fishingRodSprite);
+		
+		this.angle = angle;
+		this.board = board;
+
+		minS = (int) x - minS;
+		maxS = (int) x - maxS;
+
+		minU = Math.sqrt((minS * 9.8) / Math.sin(2 * angle));
+		maxU = Math.sqrt((maxS * 9.8) / Math.sin(2 * angle));
+
+		this.hook = new FishingHook(this.x, this.y);
 		this.player = player;
 		this.line = new FishingLine(this, hook, board);
 
@@ -47,24 +61,11 @@ public class FishingRod extends Entity {
 		private double startX, startY;
 		private double xSpeed, ySpeed;
 		private double time, deltaTime = 0.03; // in seconds
-		private FishingRod rod;
-		private Board board;
 
 		private boolean hasHitWater = false;
 
-		private double minU, maxU, angle, U;
-		int minS = 87, maxS = 40;
-
-		public FishingHook(int x, int y, Board board, double angle) {
+		public FishingHook(int x, int y) {
 			super(x, y, 4, 8, StaticSprites.hookSprite);
-			this.angle = angle;
-			this.board = board;
-
-			minS = (int) x - minS;
-			maxS = (int) x - maxS;
-
-			minU = Math.sqrt((minS * 9.8) / Math.sin(2 * angle));
-			maxU = Math.sqrt((maxS * 9.8) / Math.sin(2 * angle));
 		}
 		
 		public void splash() {

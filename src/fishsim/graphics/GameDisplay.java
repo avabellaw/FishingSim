@@ -10,6 +10,8 @@ public class GameDisplay extends Display {
 
 	public GameDisplay(Dimension dimensions, int scale, String title) {
 		super(dimensions, scale, title);
+		
+		addMouseMotionListener(GameBoard);
 	}
 
 }

@@ -12,7 +12,7 @@ public class Fisher extends Entity {
 	public Fisher(int x, int y, Board board) {
 		super(x, y, width, height);
 
-		rod = new FishingRod(x, y + height, board, this);
+		rod = new FishingRod(x, y + height, board, this, 45);
 
 		board.entities.add(this);
 		board.entities.add(rod);
