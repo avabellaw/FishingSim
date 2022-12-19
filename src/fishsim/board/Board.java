@@ -27,7 +27,7 @@ public abstract class Board extends BoardTemplate {
 		super(boardSize, 1, display);
 
 		this.blueprint = blueprintSprite;
-
+		
 		boardPixels = new int[boardSize.width * boardSize.height * TILE_SIZE];
 
 		addMapToBoard();

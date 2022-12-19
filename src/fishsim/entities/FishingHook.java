@@ -9,11 +9,19 @@ public class FishingHook extends Entity {
 	private double startX, startY;
 	private double xSpeed, ySpeed;
 	private double time, deltaTime = 0.03; // in seconds
+	
+	private int doubleRodAngle, maxU, minU;
+	private double U;
 
 	private boolean hasHitWater = false;
 
-	public FishingHook(int x, int y) {
+	public FishingHook(int x, int y, int angle, int maxU, int minU, int U) {
 		super(x, y, 4, 8, StaticSprites.hookSprite);
+		
+		this.doubleRodAngle = angle;
+		this.maxU = maxU;
+		this.minU = minU;
+		this.U= U;
 	}
 	
 	public void splash() {
@@ -46,8 +54,8 @@ public class FishingHook extends Entity {
 
 		startX = x;
 		startY = y;
-		hook.xSpeed = speed * Math.cos(angle * (Math.PI / 180));
-		hook.ySpeed = speed * Math.sin(angle * (Math.PI / 180));
+		xSpeed = speed * Math.cos(doubleRodAngle * (Math.PI / 180));
+		ySpeed = speed * Math.sin(doubleRodAngle * (Math.PI / 180));
 	}
 
 //	private double getRange() {
@@ -60,12 +68,12 @@ public class FishingHook extends Entity {
 
 	@Override
 	public void update() {
-		if (y < 64 - hook.height / 2 - 2) {
+		if (y < 64 - height / 2 - 2) {
 			x = (int) (startX - (xSpeed * time));
 			y = (int) (startY - ((ySpeed * time) - (0.5 * 9.8 * Math.pow(time, 2))));
 		} else {
 			if (!hasHitWater) {
-				hook.splash();
+				splash();
 				
 				hasHitWater = true;
 			}

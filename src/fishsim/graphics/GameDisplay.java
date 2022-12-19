@@ -14,6 +14,7 @@ public class GameDisplay extends Display {
 	public static int mouseX = 0, mouseY = 0;
 	
 	public static boolean isMouseOnScreen = false;
+	public static boolean isMouseOutsideBorders = false;
 
 	public GameDisplay(Dimension dimensions, int scale, String title) {
 		super(dimensions, scale, title);
@@ -50,7 +51,8 @@ public class GameDisplay extends Display {
 			@Override
 			public void mouseExited(MouseEvent e) {
 				isMouseOnScreen = false;
-				
+				mouseX = e.getX();
+				mouseY = e.getY();
 			}
 			
 			@Override
@@ -65,10 +67,6 @@ public class GameDisplay extends Display {
 				
 			}
 		});
-	}
-	
-	public static void callMouseMoved(MouseEvent e) {
-		
 	}
 
 }

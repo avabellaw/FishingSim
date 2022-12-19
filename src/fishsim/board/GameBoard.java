@@ -8,10 +8,12 @@ import fishsim.entities.GameHook;
 import fishsim.graphics.StaticSprites;
 
 public class GameBoard extends Board {
-
+	
 	private GameHook gHook;
 	public static FishingLine line;
 	public Display display;
+				//	Left	 Right
+	public static int[] borders = {9, 9 };
 
 	public Boundaries boundaries;
 
@@ -38,11 +40,11 @@ public class GameBoard extends Board {
 		// Enter the values
 		public Boundaries(int left, int right, int top, int bottom) {
 			this.left = left;
-			this.right = display.width - right;
+			this.right = BOARD_SIZE.width - right;
 			this.top = top;
-			this.bottom = display.height - bottom;
+			this.bottom = BOARD_SIZE.height - bottom;
 		}
-
+		
 		public int left() {
 			return left;
 		}
