@@ -21,7 +21,7 @@ public class GameBoard extends Board {
 	public GameBoard(Dimension boardSize, Display display) {
 		super(boardSize, display, StaticSprites.gameBlueprintSprite);
 		this.display = display;
-		boundaries = new Boundaries(boardSize.width, boardSize.height, 9, 9, 0, 0);
+		boundaries = new Boundaries(9, 9, 0, 0);
 		
 		
 		gHook = new GameHook(this, (BOARD_SIZE.width / 2) - GameHook.WIDTH / 2, BOARD_SIZE.height - GameHook.HEIGHT);
@@ -51,16 +51,14 @@ public class GameBoard extends Board {
 	 */
 	public class Boundaries {
 
-		private int left, right, top, bottom, width, height;
+		private int left, right, top, bottom;
 
 		// Enter the values
-		public Boundaries(int width, int height, int left, int right, int top, int bottom) {
+		public Boundaries(int left, int right, int top, int bottom) {
 			this.left = left;
 			this.right = BOARD_SIZE.width - right;
 			this.top = top;
 			this.bottom = BOARD_SIZE.height - bottom;
-			this.width = width;
-			this.height = height;
 		}
 		
 		public boolean withinBoundaries(int x, int y) {
