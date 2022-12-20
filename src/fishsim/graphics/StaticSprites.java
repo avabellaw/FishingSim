@@ -7,6 +7,7 @@ import engine.graphics.sprites.Spritesheet;
 import fishsim.Main;
 import fishsim.entities.FishingRod;
 import fishsim.entities.GameHook;
+import fishsim.entities.passingobjects.Fish;
 
 public class StaticSprites {
 
@@ -27,20 +28,6 @@ public class StaticSprites {
 	public static Sprite gameBlueprintSprite = new Sprite(BOARD_WIDTH/*offset*/, 0, BOARD_WIDTH, BOARD_HEIGHT, blueprintSpritesheet);
 	
 	//Fish	
-	enum FishSize {
-		PINK (18, 16);
-		
-		int width, height;
-		
-		Dimension dimensions() {
-			return new Dimension(width, height);
-		}
-		
-		FishSize(int width, int height){
-			this.width = width;
-			this.height = height;
-		}
-	}
-	
-	public static Sprite pinkFishSprite = new Sprite(0, MAIN.height-FishSize.PINK.width, FishSize.PINK.dimensions(), mainSpritesheet);
+	public final static Sprite pinkFishSprite = new Sprite(0, MAIN.height-Fish.PinkFish.size.height, Fish.PinkFish.size,mainSpritesheet);
+	public final static Sprite yellowFishSprite = new Sprite(Fish.PinkFish.WIDTH, MAIN.height-Fish.YellowFish.size.height, Fish.YellowFish.size,mainSpritesheet);
 }

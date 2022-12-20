@@ -18,7 +18,7 @@ public class GameBoard extends Board {
 	public GameHook gHook;
 	public static FishingLine line;
 	private AtomicInteger aCounter = new AtomicInteger();
-	private static int score = 0;
+	private static int score = 0, totalPossibleScore = 0;
 	private static int addFishCoolOff = 10;
 	private LinkedList<PassingObject> objects = new LinkedList<PassingObject>();
 
@@ -34,9 +34,10 @@ public class GameBoard extends Board {
 		line = new FishingLine(gHook);
 		entities.add(line);
 
-		for(int i = 0; i < 100; i++) {
-			Fish fish = new Fish.PinkFish(this);
+		for (int i = 0; i < 100; i++) {
+			Fish fish = Math.random() > 0.5 ? new Fish.PinkFish(this) : new Fish.YellowFish(this);
 			fish.initialise();
+			totalPossibleScore += fish.POINTS;
 			objects.push(fish);
 		}
 	}
@@ -44,7 +45,7 @@ public class GameBoard extends Board {
 	public void update() {
 		super.update();
 
-		if (aCounter.incrementAndGet() >= addFishCoolOff + objects.size()) {
+		if (aCounter.incrementAndGet() >= addFishCoolOff + (objects.size() * 0.7)) {
 			aCounter.set(0);
 			addNewFish();
 		}
@@ -54,7 +55,7 @@ public class GameBoard extends Board {
 		try {
 			entities.add(objects.pop());
 		} catch (NoSuchElementException e) {
-			System.out.println("no more objects");
+			System.out.println("Score: " + score + " out of " + totalPossibleScore);
 		}
 	}
 

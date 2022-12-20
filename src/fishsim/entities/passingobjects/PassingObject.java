@@ -8,7 +8,7 @@ import fishsim.entities.GameHook;
 
 public abstract class PassingObject extends Entity {
 
-	double speed = 0.6, delta = 0.0;
+	private double speed = 0.6, delta = 0.0;
 	protected GameHook hook;
 	protected GameBoard board;
 	protected int pointsWorth = 0;
@@ -23,6 +23,10 @@ public abstract class PassingObject extends Entity {
 
 		this.isVoid = true;
 	}
+	
+	protected void setSpeed(double speed) {
+		this.speed = speed;
+	}
 
 	@Override
 	public void update() {
@@ -30,7 +34,8 @@ public abstract class PassingObject extends Entity {
 
 		if (delta >= 1.0) {
 			y--;
-			delta = 0.0;
+			delta--;
+			System.out.println("SPeed: " + speed);
 		}
 
 		if (this.isTouching(hook))
