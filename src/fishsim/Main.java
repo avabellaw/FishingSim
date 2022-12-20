@@ -30,6 +30,7 @@ public class Main extends Component {
 
 	public static void swapBoard(Board newBoard) {
 		board = newBoard;
+		GameDisplay.drawScore = true;
 	}
 
 	public void update() {

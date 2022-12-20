@@ -15,6 +15,7 @@ public class GameBoard extends Board {
 	public GameHook gHook;
 	public static FishingLine line;
 	private AtomicInteger aCounter = new AtomicInteger();
+	public static int score = 0;
 
 	public Boundaries boundaries;
 
