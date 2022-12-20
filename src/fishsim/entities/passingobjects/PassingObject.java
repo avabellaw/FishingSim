@@ -1,9 +1,8 @@
 package fishsim.entities.passingobjects;
 
-import java.awt.Color;
-
 import engine.core.Component;
 import engine.entity.Entity;
+import engine.graphics.sprites.Sprite;
 import fishsim.board.GameBoard;
 import fishsim.entities.GameHook;
 
@@ -13,12 +12,16 @@ public abstract class PassingObject extends Entity {
 	protected GameHook hook;
 	protected GameBoard board;
 	protected int pointsWorth = 0;
+	
+	public final int POINTS;
 
-	public PassingObject(GameBoard board, int x, int width, int height, Color colour) {
-		super(x, board.BOARD_SIZE.height, width, height, colour);
+	public PassingObject(GameBoard board, int width, int height, Sprite sprite, int points) {
+		super(board.BOARD_SIZE.width / 2, board.BOARD_SIZE.height, width, height, sprite);
+		this.POINTS = points;
 		this.board = board;
 		this.hook = board.gHook;
 
+		this.isVoid = true;
 	}
 
 	@Override
@@ -38,6 +41,11 @@ public abstract class PassingObject extends Entity {
 		}
 	}
 
+	public void initialise() {
+		x = getRandomStartX();
+		isVoid = false;
+	}
+
 	protected abstract void caughtByHook();
 
 	protected void removePassingObject() {
@@ -46,7 +54,7 @@ public abstract class PassingObject extends Entity {
 			System.out.println("Removed object: " + getClassName());
 	}
 
-	protected int getRandomStartX() {
+	private int getRandomStartX() {
 		return (int) (Math.random() * (board.boundaries.right() - board.boundaries.left() - width))
 				+ board.boundaries.left();
 	}

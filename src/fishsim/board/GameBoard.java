@@ -35,7 +35,9 @@ public class GameBoard extends Board {
 		entities.add(line);
 
 		for(int i = 0; i < 100; i++) {
-			objects.push(new Fish(this));
+			Fish fish = new Fish.PinkFish(this);
+			fish.initialise();
+			objects.push(fish);
 		}
 	}
 

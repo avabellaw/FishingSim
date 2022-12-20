@@ -1,29 +1,27 @@
 package fishsim.entities.passingobjects;
 
-import java.awt.Color;
-
+import engine.graphics.sprites.Sprite;
 import fishsim.board.GameBoard;
+import fishsim.graphics.StaticSprites;
 
 public class Fish extends PassingObject {
-	
-	protected int pointsWorth = 5;
 
-	public Fish(GameBoard board, int x, int width, int height, int points) {
-		super(board, x, width, height, Color.red);
+	public Fish(GameBoard board, int width, int height, Sprite sprite, int points) {
+		super(board, width, height, sprite, points);
 	}
 
 	@Override
 	protected void caughtByHook() {
-		GameBoard.addPoints(pointsWorth);
+		GameBoard.addPoints(POINTS);
 		removePassingObject();
 	}
-	
-	public class PinkFish extends Fish{
 
-		public PinkFish(GameBoard board, ) {
-			super(board);
-		}
+	public static class PinkFish extends Fish {
 		
+		public PinkFish(GameBoard board) {
+			super(board, 18, 16, StaticSprites.pinkFishSprite, 12);
+		}
+
 	}
 
 }
