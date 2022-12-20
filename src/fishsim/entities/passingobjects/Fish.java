@@ -18,11 +18,5 @@ public class Fish extends PassingObject {
 	protected void caughtByHook() {
 		removePassingObject();
 	}
-	
-	protected void removePassingObject() {
-		super.removePassingObject();
-		
-		board.addNewFish();
-	}
 
 }

@@ -1,6 +1,7 @@
 package fishsim.board;
 
 import java.awt.Dimension;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import engine.core.graphics.Display;
 import engine.entity.Entity;
@@ -13,6 +14,7 @@ public class GameBoard extends Board {
 
 	public GameHook gHook;
 	public static FishingLine line;
+	private AtomicInteger aCounter = new AtomicInteger();
 
 	public Boundaries boundaries;
 
@@ -28,6 +30,15 @@ public class GameBoard extends Board {
 		entities.add(line);
 
 		addNewFish();
+	}
+	
+	public void update() {
+		super.update();
+		
+		if(aCounter.incrementAndGet() >= 180) {
+			aCounter.set(0);
+			addNewFish();
+		}
 	}
 	
 	public void addNewFish() {
