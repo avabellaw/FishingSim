@@ -35,7 +35,7 @@ public class GameBoard extends Board {
 	public void update() {
 		super.update();
 		
-		if(aCounter.incrementAndGet() >= 180) {
+		if(aCounter.incrementAndGet() >= 60) {
 			aCounter.set(0);
 			addNewFish();
 		}

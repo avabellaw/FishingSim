@@ -18,7 +18,7 @@ public class Main extends Component {
 	public static Display display = new GameDisplay(new Dimension(WIDTH, HEIGHT), 3, "Fishing Simulator !");
 	public static Board board = new StartBoard(DIMENSIONS, display);
 	public static Board gameBoard = new GameBoard(DIMENSIONS, display);
-	Ticker ticker = new Ticker(this, display, 180);
+	Ticker ticker = new Ticker(this, display, 100);
 
 	public Main() {
 
