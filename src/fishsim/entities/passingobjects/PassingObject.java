@@ -1,20 +1,20 @@
-package fishsim.entities.droppingobjects;
+package fishsim.entities.passingobjects;
 
 import java.awt.Color;
 
+import engine.core.Component;
 import engine.entity.Entity;
-import fishsim.Main;
 import fishsim.board.GameBoard;
 import fishsim.entities.GameHook;
 
-public abstract class DroppingObject extends Entity {
+public abstract class PassingObject extends Entity {
 
 	double speed = 0.2, delta = 0.0;
 	protected GameHook hook;
 	protected GameBoard board;
 
-	public DroppingObject(GameBoard board, int y, int width, int height, Color colour) {
-		super((int) (Math.random() * Main.DIMENSIONS.width), y + 50, width, height, colour);
+	public PassingObject(GameBoard board, int x, int width, int height, Color colour) {
+		super(x, board.BOARD_SIZE.height, width, height, colour);
 		this.board = board;
 		this.hook = board.gHook;
 
@@ -22,21 +22,27 @@ public abstract class DroppingObject extends Entity {
 
 	@Override
 	public void update() {
-		// delta += speed;
+		delta += speed;
 
 		if (delta >= 1.0) {
-			y++;
+			y--;
 			delta = 0.0;
 		}
 
 		if (this.isTouching(hook))
 			caughtByHook();
+
+		if (this.y + height< 0) {
+			removeDroppingObject();
+		}
 	}
 
 	protected abstract void caughtByHook();
-	
+
 	protected void removeDroppingObject() {
 		board.entities.remove(this);
+		if (Component.LOGGIN_ON)
+			System.out.println("Removed object: " + getClassName());
 	}
 
 }
