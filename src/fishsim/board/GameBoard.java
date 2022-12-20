@@ -5,15 +5,13 @@ import java.awt.Dimension;
 import engine.core.graphics.Display;
 import fishsim.entities.FishingLine;
 import fishsim.entities.GameHook;
+import fishsim.entities.droppingobjects.Fish;
 import fishsim.graphics.StaticSprites;
 
 public class GameBoard extends Board {
 	
-	private GameHook gHook;
+	public static GameHook gHook;
 	public static FishingLine line;
-	public Display display;
-				//	Left	 Right
-	public static int[] borders = {9, 9 };
 
 	public Boundaries boundaries;
 
@@ -25,6 +23,8 @@ public class GameBoard extends Board {
 		entities.add(gHook);
 		line = new FishingLine(gHook);
 		entities.add(line);
+		
+		entities.add(new Fish(gHook));
 		
 		boundaries = new Boundaries(9, 9, 0, 0);
 	}

@@ -5,6 +5,7 @@ import java.awt.Point;
 import engine.entity.Entity;
 import fishsim.board.GameBoard;
 import fishsim.board.GameBoard.Boundaries;
+import fishsim.entities.droppingobjects.DroppingObject;
 import fishsim.graphics.GameDisplay;
 import fishsim.graphics.StaticSprites;
 
@@ -73,5 +74,13 @@ public class GameHook extends Entity {
 			x += addToX;
 		if (!(y + height + addToY > b.bottom()) && !(y + addToY < b.top()))
 			y += addToY;
+		
+		for(Entity entity : board.entities) {
+			if(!(entity instanceof DroppingObject)) continue;
+			
+			DroppingObject droppingObj = (DroppingObject) entity;
+			
+			if(this.isTouching(droppingObj)) board.entities.remove(droppingObj);
+		}
 	}
 }
