@@ -7,6 +7,7 @@ import fishsim.board.GameBoard;
 public class Fish extends PassingObject {
 	
 	private static final int w = 10, h = 5;
+	protected int pointsWorth = 5;
 
 	public Fish(GameBoard board, int x) {
 		super(board, x, w, h, Color.red);
@@ -18,7 +19,7 @@ public class Fish extends PassingObject {
 
 	@Override
 	protected void caughtByHook() {
-		GameBoard.score += 5;
+		GameBoard.addPoints(pointsWorth);
 		removePassingObject();
 	}
 

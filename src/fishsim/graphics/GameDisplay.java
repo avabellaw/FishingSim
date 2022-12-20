@@ -81,7 +81,7 @@ public class GameDisplay extends Display {
 		Font font = new Font("Serif", Font.PLAIN, 20);
 
 		g2.setFont(font);
-		g2.drawString("Score: " + GameBoard.score, 35, 25);
+		g2.drawString("Score: " + GameBoard.getScore(), 35, 25);
 	}
 
 }

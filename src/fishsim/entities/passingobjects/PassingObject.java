@@ -9,9 +9,10 @@ import fishsim.entities.GameHook;
 
 public abstract class PassingObject extends Entity {
 
-	double speed = 0.5, delta = 0.0;
+	double speed = 0.6, delta = 0.0;
 	protected GameHook hook;
 	protected GameBoard board;
+	protected int pointsWorth = 0;
 
 	public PassingObject(GameBoard board, int x, int width, int height, Color colour) {
 		super(x, board.BOARD_SIZE.height, width, height, colour);

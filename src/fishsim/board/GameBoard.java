@@ -1,6 +1,8 @@
 package fishsim.board;
 
 import java.awt.Dimension;
+import java.util.LinkedList;
+import java.util.NoSuchElementException;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import engine.core.graphics.Display;
@@ -8,6 +10,7 @@ import engine.entity.Entity;
 import fishsim.entities.FishingLine;
 import fishsim.entities.GameHook;
 import fishsim.entities.passingobjects.Fish;
+import fishsim.entities.passingobjects.PassingObject;
 import fishsim.graphics.StaticSprites;
 
 public class GameBoard extends Board {
@@ -15,7 +18,9 @@ public class GameBoard extends Board {
 	public GameHook gHook;
 	public static FishingLine line;
 	private AtomicInteger aCounter = new AtomicInteger();
-	public static int score = 0;
+	private static int score = 0;
+	private static int addFishCoolOff = 10;
+	private LinkedList<PassingObject> objects = new LinkedList<PassingObject>();
 
 	public Boundaries boundaries;
 
@@ -23,27 +28,32 @@ public class GameBoard extends Board {
 		super(boardSize, display, StaticSprites.gameBlueprintSprite);
 		this.display = display;
 		boundaries = new Boundaries(9, 9, 0, 0);
-		
-		
+
 		gHook = new GameHook(this, (BOARD_SIZE.width / 2) - GameHook.WIDTH / 2, BOARD_SIZE.height - GameHook.HEIGHT);
 		entities.add(gHook);
 		line = new FishingLine(gHook);
 		entities.add(line);
 
-		addNewFish();
+		for(int i = 0; i < 100; i++) {
+			objects.push(new Fish(this));
+		}
 	}
-	
+
 	public void update() {
 		super.update();
-		
-		if(aCounter.incrementAndGet() >= 60) {
+
+		if (aCounter.incrementAndGet() >= addFishCoolOff + objects.size()) {
 			aCounter.set(0);
 			addNewFish();
 		}
 	}
-	
+
 	public void addNewFish() {
-		entities.add(new Fish(this));
+		try {
+			entities.add(objects.pop());
+		} catch (NoSuchElementException e) {
+			System.out.println("no more objects");
+		}
 	}
 
 	/**
@@ -61,11 +71,11 @@ public class GameBoard extends Board {
 			this.top = top;
 			this.bottom = BOARD_SIZE.height - bottom;
 		}
-		
+
 		public boolean withinBoundaries(int x, int y) {
 			return x > left && x < right && y > top && y < bottom;
 		}
-		
+
 		public boolean withinBoundaries(Entity e) {
 			int x = e.x;
 			int y = e.y;
@@ -88,6 +98,14 @@ public class GameBoard extends Board {
 			return bottom;
 		}
 
+	}
+
+	public static void addPoints(int points) {
+		score += points;
+	}
+
+	public static int getScore() {
+		return score;
 	}
 
 }
