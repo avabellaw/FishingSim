@@ -12,7 +12,7 @@ import engine.core.*;
 
 public class Main extends Component {
 
-	private final static int WIDTH = 150, HEIGHT = 200, SCALE = 2; // Sprite has to be adjust if size is changed
+	private final static int WIDTH = 200, HEIGHT = 200, SCALE = 2; // Sprite has to be adjust if size is changed
 	public final static Dimension DIMENSIONS = new Dimension(WIDTH, HEIGHT);
 
 	public static Display display = new GameDisplay(DIMENSIONS, SCALE, "Fishing Simulator !");

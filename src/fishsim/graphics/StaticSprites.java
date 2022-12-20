@@ -2,6 +2,7 @@ package fishsim.graphics;
 
 import engine.graphics.sprites.Sprite;
 import engine.graphics.sprites.Spritesheet;
+import fishsim.Main;
 import fishsim.entities.FishingRod;
 import fishsim.entities.GameHook;
 
@@ -17,7 +18,8 @@ public class StaticSprites {
 	
 
 	// res/sprites/BoardBlueprint.png
-	public static Spritesheet blueprintSpritesheet = new Spritesheet("res/sprites/BoardBlueprint.png", 300, 150);
-	public static Sprite blueprintSprite = new Sprite(0, 0, 150, 150, blueprintSpritesheet);
-	public static Sprite gameBlueprintSprite = new Sprite(150, 0, 150, 150, blueprintSpritesheet);
+	private static final int BOARD_WIDTH = Main.DIMENSIONS.width, BOARD_HEIGHT = Main.DIMENSIONS.height;
+	public static Spritesheet blueprintSpritesheet = new Spritesheet("res/sprites/BoardBlueprint.png", BOARD_WIDTH * 2, BOARD_HEIGHT);
+	public static Sprite blueprintSprite = new Sprite(0, 0, BOARD_WIDTH, BOARD_HEIGHT, blueprintSpritesheet);
+	public static Sprite gameBlueprintSprite = new Sprite(BOARD_WIDTH/*offset*/, 0, BOARD_WIDTH, BOARD_HEIGHT, blueprintSpritesheet);
 }
