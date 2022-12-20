@@ -33,7 +33,7 @@ public abstract class PassingObject extends Entity {
 		if (this.isTouching(hook))
 			caughtByHook();
 
-		if (this.y + height< 0) {
+		if (this.y + height < 0) {
 			removePassingObject();
 		}
 	}
@@ -44,6 +44,11 @@ public abstract class PassingObject extends Entity {
 		board.entities.remove(this);
 		if (Component.LOGGIN_ON)
 			System.out.println("Removed object: " + getClassName());
+	}
+
+	protected int getRandomStartX() {
+		return (int) (Math.random() * (board.boundaries.right() - board.boundaries.left() - width))
+				+ board.boundaries.left();
 	}
 
 }
