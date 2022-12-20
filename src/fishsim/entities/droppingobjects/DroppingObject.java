@@ -34,5 +34,9 @@ public abstract class DroppingObject extends Entity {
 	}
 
 	protected abstract void caughtByHook();
+	
+	protected void removeDroppingObject() {
+		board.entities.remove(this);
+	}
 
 }

@@ -12,7 +12,7 @@ public class Fish extends DroppingObject {
 
 	@Override
 	protected void caughtByHook() {
-		System.out.println("caught");
+		removeDroppingObject();
 	}
 
 }
