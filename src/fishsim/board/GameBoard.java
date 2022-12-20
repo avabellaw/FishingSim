@@ -10,7 +10,7 @@ import fishsim.graphics.StaticSprites;
 
 public class GameBoard extends Board {
 	
-	public static GameHook gHook;
+	public GameHook gHook;
 	public static FishingLine line;
 
 	public Boundaries boundaries;
@@ -24,7 +24,7 @@ public class GameBoard extends Board {
 		line = new FishingLine(gHook);
 		entities.add(line);
 		
-		entities.add(new Fish(gHook));
+		entities.add(new Fish(this));
 		
 		boundaries = new Boundaries(9, 9, 0, 0);
 	}

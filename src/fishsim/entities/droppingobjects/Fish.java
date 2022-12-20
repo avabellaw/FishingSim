@@ -2,19 +2,17 @@ package fishsim.entities.droppingobjects;
 
 import java.awt.Color;
 
-import fishsim.entities.GameHook;
+import fishsim.board.GameBoard;
 
 public class Fish extends DroppingObject {
 
-	public Fish(GameHook hook) {
-		super(hook, 0, 10, 5, Color.red);
-		// TODO Auto-generated constructor stub
+	public Fish(GameBoard board) {
+		super(board, 0, 10, 5, Color.red);
 	}
 
 	@Override
 	protected void caughtByHook() {
-		// TODO Auto-generated method stub
-
+		System.out.println("caught");
 	}
 
 }
