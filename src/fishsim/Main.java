@@ -12,10 +12,10 @@ import engine.core.*;
 
 public class Main extends Component {
 
-	private final static int WIDTH = 150, HEIGHT = 150;
+	private final static int WIDTH = 150, HEIGHT = 150, SCALE = 3;
 	public final static Dimension DIMENSIONS = new Dimension(WIDTH, HEIGHT);
 
-	public static Display display = new GameDisplay(new Dimension(WIDTH, HEIGHT), 3, "Fishing Simulator !");
+	public static Display display = new GameDisplay(DIMENSIONS, SCALE, "Fishing Simulator !");
 	public static Board board = new StartBoard(DIMENSIONS, display);
 	public static Board gameBoard = new GameBoard(DIMENSIONS, display);
 	Ticker ticker = new Ticker(this, display, 100);

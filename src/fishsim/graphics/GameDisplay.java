@@ -75,7 +75,8 @@ public class GameDisplay extends Display {
 	}
 
 	public void draw(Graphics g) {
-		if(!drawScore) return;
+		if (!drawScore)
+			return;
 		Graphics2D g2 = (Graphics2D) g;
 		g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 		Font font = new Font("Serif", Font.PLAIN, 20);
