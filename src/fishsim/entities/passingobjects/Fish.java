@@ -18,6 +18,7 @@ public class Fish extends PassingObject {
 
 	@Override
 	protected void caughtByHook() {
+		GameBoard.score += 5;
 		removePassingObject();
 	}
 
