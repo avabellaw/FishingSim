@@ -27,7 +27,11 @@ public class GameBoard extends Board {
 		line = new FishingLine(gHook);
 		entities.add(line);
 
-		entities.add(new Fish(this, (int) (Math.random() * (boundaries.right - boundaries.left)) + boundaries.left));
+		addNewFish();
+	}
+	
+	public void addNewFish() {
+		entities.add(new Fish(this));
 	}
 
 	/**

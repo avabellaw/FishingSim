@@ -9,7 +9,7 @@ import fishsim.entities.GameHook;
 
 public abstract class PassingObject extends Entity {
 
-	double speed = 0.2, delta = 0.0;
+	double speed = 0.25, delta = 0.0;
 	protected GameHook hook;
 	protected GameBoard board;
 
@@ -33,13 +33,13 @@ public abstract class PassingObject extends Entity {
 			caughtByHook();
 
 		if (this.y + height< 0) {
-			removeDroppingObject();
+			removePassingObject();
 		}
 	}
 
 	protected abstract void caughtByHook();
 
-	protected void removeDroppingObject() {
+	protected void removePassingObject() {
 		board.entities.remove(this);
 		if (Component.LOGGIN_ON)
 			System.out.println("Removed object: " + getClassName());
