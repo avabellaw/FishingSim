@@ -35,6 +35,6 @@ public class StaticSprites {
 			Fish.PinkFish.HEIGHT, mainSpritesheet);
 	public final static Sprite yellowFishSprite = new Sprite(pinkFishSprite.positionRight(),
 			MAIN.height - Fish.YellowFish.HEIGHT, Fish.YellowFish.WIDTH, Fish.YellowFish.HEIGHT, mainSpritesheet);
-	public final static Sprite zebraFishSprite = new Sprite(yellowFishSprite.positionRight(),
-			MAIN.height - Fish.ZebraFish.HEIGHT, Fish.ZebraFish.WIDTH, Fish.ZebraFish.HEIGHT, mainSpritesheet);
+	public final static Sprite zebraFishSprite = new Sprite(0,
+			pinkFishSprite.positionAbove(Fish.ZebraFish.HEIGHT), Fish.ZebraFish.WIDTH, Fish.ZebraFish.HEIGHT, mainSpritesheet);
 }
