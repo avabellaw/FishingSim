@@ -72,6 +72,10 @@ public class GameBoard extends Board {
 			//System.out.println("Score: " + score + " out of " + totalPossibleScore);
 		}
 	}
+	
+	public void outOfObjects() {
+		
+	}
 
 	/**
 	 * Put in the values for how many pixels away from the border you want the
