@@ -1,15 +1,13 @@
 package fishsim.entities.passingobjects;
 
-import java.awt.Dimension;
-
 import engine.graphics.sprites.Sprite;
 import fishsim.board.GameBoard;
 import fishsim.graphics.StaticSprites;
 
 public class Fish extends PassingObject {
 
-	public Fish(GameBoard board, int width, int height, Sprite sprite, int points) {
-		super(board, width, height, sprite, points);
+	public Fish(GameBoard board, Sprite sprite, int points) {
+		super(board, sprite, points);
 	}
 
 	@Override
@@ -21,20 +19,28 @@ public class Fish extends PassingObject {
 	public static class PinkFish extends Fish {
 
 		public final static int WIDTH = 20, HEIGHT = 18;
-		public final static Dimension size = new Dimension(WIDTH, HEIGHT);
 
 		public PinkFish(GameBoard board) {
-			super(board, size.width, size.height, StaticSprites.pinkFishSprite, 7);
+			super(board, StaticSprites.pinkFishSprite, 7);
 			setSpeed(0.7);
 		}
 	}
 
 	public static class YellowFish extends Fish {
 		public final static int WIDTH = 19, HEIGHT = 18;
-		public final static Dimension size = new Dimension(WIDTH, HEIGHT);
 
 		public YellowFish(GameBoard board) {
-			super(board, size.width, size.height, StaticSprites.yellowFishSprite, 6);
+			super(board, StaticSprites.yellowFishSprite, 6);
+		}
+
+	}
+
+	public static class ZebraFish extends Fish {
+		public final static int WIDTH = 30, HEIGHT = 24;
+
+		public ZebraFish(GameBoard board) {
+			super(board, StaticSprites.zebraFishSprite, 10);
+			setSpeed(1.2);
 		}
 
 	}

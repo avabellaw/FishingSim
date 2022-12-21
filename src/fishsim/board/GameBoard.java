@@ -35,7 +35,7 @@ public class GameBoard extends Board {
 		entities.add(line);
 
 		for (int i = 0; i < 100; i++) {
-			Fish fish = Math.random() > 0.5 ? new Fish.PinkFish(this) : new Fish.YellowFish(this);
+			Fish fish = Math.random() > 0.6 ? new Fish.PinkFish(this) : Math.random() > 0.5 ? new Fish.ZebraFish(this): new Fish.YellowFish(this);
 			fish.initialise();
 			totalPossibleScore += fish.POINTS;
 			objects.push(fish);

@@ -15,8 +15,8 @@ public abstract class PassingObject extends Entity {
 	
 	public final int POINTS;
 
-	public PassingObject(GameBoard board, int width, int height, Sprite sprite, int points) {
-		super(board.BOARD_SIZE.width / 2, board.BOARD_SIZE.height, width, height, sprite);
+	public PassingObject(GameBoard board, Sprite sprite, int points) {
+		super(board.BOARD_SIZE.width / 2, board.BOARD_SIZE.height, sprite);
 		this.POINTS = points;
 		this.board = board;
 		this.hook = board.gHook;
@@ -35,7 +35,6 @@ public abstract class PassingObject extends Entity {
 		if (delta >= 1.0) {
 			y--;
 			delta--;
-			System.out.println("SPeed: " + speed);
 		}
 
 		if (this.isTouching(hook))
