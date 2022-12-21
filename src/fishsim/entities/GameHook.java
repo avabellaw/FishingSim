@@ -39,14 +39,14 @@ public class GameHook extends Entity {
 			}
 		} else {
 			if (x + WIDTH / 2 >= board.BOARD_SIZE.width / 2)
-				xDir--;
-			if (x - WIDTH / 2 <= board.BOARD_SIZE.width / 2)
-				xDir++;
+				x--;
+			if (x + WIDTH / 2 < board.BOARD_SIZE.width / 2)
+				x++;
 
 			if (y + HEIGHT / 2 >= board.BOARD_SIZE.height / 2)
-				yDir--;
-			if (y - HEIGHT / 2 <= board.BOARD_SIZE.height / 2)
-				yDir++;
+				y--;
+			if (y + HEIGHT / 2 <= board.BOARD_SIZE.height / 2)
+				y++;
 		}
 	}
 	

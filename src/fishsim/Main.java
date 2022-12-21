@@ -19,6 +19,8 @@ public class Main extends Component {
 	public static Display display = new GameDisplay(DIMENSIONS, SCALE, "Fishing Simulator !");
 	public static Board board = new StartBoard(DIMENSIONS, display);
 	public static Board gameBoard = new GameBoard(DIMENSIONS, display);
+	
+	public static boolean splashFinished = false;
 	Ticker ticker = new Ticker(this, display, 100);
 
 	public Main(int args) {
@@ -27,21 +29,23 @@ public class Main extends Component {
 
 	public static void main(String[] args) {
 		int logLevel = Logger.LIVE;
-		
-		if(args.length > 0) {
+
+		if (args.length > 0) {
 			logLevel = Integer.parseInt(args[0]);
-		} 
-		
+		}
+
 		new Main(logLevel);
 	}
 
 	public static void swapBoard(Board newBoard) {
 		board = newBoard;
 		GameDisplay.drawScore = true;
+		Main.splashFinished = true;
 	}
 
 	public void update() {
-		board.update();
+		//if (GameDisplay.isMouseOnScreen || !splashFinished)
+			board.update();
 	}
 
 	public void render() {

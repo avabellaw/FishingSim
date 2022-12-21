@@ -5,8 +5,8 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
+import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 
 import engine.core.graphics.Display;
@@ -22,6 +22,7 @@ public class GameDisplay extends Display {
 	public static boolean isMouseOutsideBorders = false, drawScore = false;;
 
 	private static Font font = new Font("Serif", Font.PLAIN, 25);
+	private static Font fontPaused = new Font("Serif", Font.BOLD, 35);
 
 	public GameDisplay(Dimension dimensions, int scale, String title) {
 		super(dimensions, scale, title);
@@ -41,20 +42,7 @@ public class GameDisplay extends Display {
 			}
 		});
 
-		addMouseListener(new MouseListener() {
-
-			@Override
-			public void mouseReleased(MouseEvent e) {
-				// TODO Auto-generated method stub
-
-			}
-
-			@Override
-			public void mousePressed(MouseEvent e) {
-				// TODO Auto-generated method stub
-
-			}
-
+		addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseExited(MouseEvent e) {
 				isMouseOnScreen = false;
@@ -65,13 +53,6 @@ public class GameDisplay extends Display {
 			@Override
 			public void mouseEntered(MouseEvent e) {
 				isMouseOnScreen = true;
-
-			}
-
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				// TODO Auto-generated method stub
-
 			}
 		});
 	}
@@ -83,7 +64,21 @@ public class GameDisplay extends Display {
 		g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
 		g2.setFont(font);
+
 		g2.drawString("Score: " + GameBoard.getScore(), 35, 25);
+
+		// if(!isMouseOnScreen) {
+		// FontMetrics metrics = g.getFontMetrics(fontPaused);
+		//
+		// String message = "PAUSED";
+		//
+		// g2.setColor(new Color(0, 0, 0, 150));
+		// g2.fillRect(0, 0, this.getSize().width, this.getSize().height);
+		// g2.setColor(Color.WHITE);
+		// g2.setFont(fontPaused);
+		// g2.drawString(message, this.getSize().width / 2 -
+		// metrics.stringWidth(message) / 2, (this.getSize().height) / 2);
+		// }
 	}
 
 }

@@ -5,6 +5,7 @@ import engine.entity.Entity;
 import engine.graphics.sprites.Sprite;
 import fishsim.board.GameBoard;
 import fishsim.entities.GameHook;
+import fishsim.graphics.GameDisplay;
 
 public abstract class PassingObject extends Entity {
 
@@ -24,8 +25,8 @@ public abstract class PassingObject extends Entity {
 		this.isVoid = true;
 	}
 	
-	protected void setSpeed(double speed) {
-		this.speed = speed;
+	protected void addSpeed(double speed) {
+		this.speed += speed;
 	}
 
 	@Override
@@ -37,7 +38,7 @@ public abstract class PassingObject extends Entity {
 			delta--;
 		}
 
-		if (this.isTouching(hook))
+		if (this.isTouching(hook) && GameDisplay.isMouseOnScreen)
 			caughtByHook();
 
 		if (this.y + height < 0) {

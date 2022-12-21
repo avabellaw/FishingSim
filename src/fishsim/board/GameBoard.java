@@ -19,7 +19,7 @@ public class GameBoard extends Board {
 	public static FishingLine line;
 	private AtomicInteger aCounter = new AtomicInteger();
 	private static int score = 0, totalPossibleScore = 0;
-	private static int addFishCoolOff = 15;
+	private static int addFishCoolOff = 12, fishAmount = 150;
 	private LinkedList<PassingObject> objects = new LinkedList<PassingObject>();
 
 	public Boundaries boundaries;
@@ -34,7 +34,7 @@ public class GameBoard extends Board {
 		line = new FishingLine(gHook);
 		entities.add(line);
 
-		for (int i = 0; i < 100; i++) {
+		for (int i = 0; i < fishAmount; i++) {
 			Fish fish;
 			switch ((int) (Math.random() * 4)) {
 				case 0:
