@@ -1,6 +1,6 @@
 package fishsim.entities.passingobjects;
 
-import engine.core.Component;
+import engine.core.io.Logger;
 import engine.entity.Entity;
 import engine.graphics.sprites.Sprite;
 import fishsim.board.GameBoard;
@@ -54,8 +54,7 @@ public abstract class PassingObject extends Entity {
 
 	protected void removePassingObject() {
 		board.entities.remove(this);
-		if (Component.LOGGIN_ON)
-			System.out.println("Removed object: " + getClassName());
+		Logger.debug("Removed object: " + getClassName());
 	}
 
 	private int getRandomStartX() {
