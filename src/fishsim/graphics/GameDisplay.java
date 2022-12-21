@@ -1,7 +1,9 @@
 package fishsim.graphics;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
@@ -10,6 +12,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
 
 import engine.core.graphics.Display;
+import fishsim.Main;
 import fishsim.board.GameBoard;
 
 public class GameDisplay extends Display {
@@ -22,7 +25,7 @@ public class GameDisplay extends Display {
 	public static boolean isMouseOutsideBorders = false, drawScore = false;;
 
 	private static Font font = new Font("Serif", Font.PLAIN, 25);
-	private static Font fontPaused = new Font("Serif", Font.BOLD, 35);
+	private static Font menuFont = new Font("Serif", Font.BOLD, 35);
 
 	public GameDisplay(Dimension dimensions, int scale, String title) {
 		super(dimensions, scale, title);
@@ -66,6 +69,17 @@ public class GameDisplay extends Display {
 		g2.setFont(font);
 
 		g2.drawString("Score: " + GameBoard.getScore(), 35, 25);
+
+		if (Main.outOfObjects) {
+			FontMetrics metrics = g.getFontMetrics(menuFont);
+			String str = "You scored:\n" + GameBoard.getScore() + "/" + GameBoard.getTotalPointsPossible();
+			
+			g2.setColor(new Color(0, 0, 0, 150));
+			g2.fillRect(0, 0, this.getSize().width, this.getSize().height);
+			g2.setColor(Color.WHITE);
+			g2.setFont(menuFont);
+			g2.drawString(str,this.getSize().width / 2 - metrics.stringWidth(str) / 2, this.getSize().height / 2);
+		}
 
 		// if(!isMouseOnScreen) {
 		// FontMetrics metrics = g.getFontMetrics(fontPaused);

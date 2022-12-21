@@ -7,10 +7,12 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 import engine.core.graphics.Display;
 import engine.entity.Entity;
+import fishsim.Main;
 import fishsim.entities.FishingLine;
 import fishsim.entities.GameHook;
 import fishsim.entities.passingobjects.Fish;
 import fishsim.entities.passingobjects.PassingObject;
+import fishsim.graphics.GameDisplay;
 import fishsim.graphics.StaticSprites;
 
 public class GameBoard extends Board {
@@ -19,7 +21,7 @@ public class GameBoard extends Board {
 	public static FishingLine line;
 	private AtomicInteger aCounter = new AtomicInteger();
 	private static int score = 0, totalPossibleScore = 0;
-	private static int addFishCoolOff = 12, fishAmount = 150;
+	private static int addFishCoolOff = 12, fishAmount = 10;
 	private LinkedList<PassingObject> objects = new LinkedList<PassingObject>();
 
 	public Boundaries boundaries;
@@ -37,17 +39,17 @@ public class GameBoard extends Board {
 		for (int i = 0; i < fishAmount; i++) {
 			Fish fish;
 			switch ((int) (Math.random() * 4)) {
-				case 0:
-					fish = new Fish.YellowFish(this);
-					break;
-				case 1:
-					fish = new Fish.PinkFish(this);
-					break;
-				case 2:
-					fish = new Fish.ClownFish(this);
-					break;
-				default:
-					fish = new Fish.ZebraFish(this);
+			case 0:
+				fish = new Fish.YellowFish(this);
+				break;
+			case 1:
+				fish = new Fish.PinkFish(this);
+				break;
+			case 2:
+				fish = new Fish.ClownFish(this);
+				break;
+			default:
+				fish = new Fish.ZebraFish(this);
 			}
 			fish.initialise();
 			totalPossibleScore += fish.POINTS;
@@ -56,25 +58,35 @@ public class GameBoard extends Board {
 	}
 
 	public void update() {
+		if(Main.isPaused) return;
+		
 		super.update();
 
 		if (aCounter.incrementAndGet() >= addFishCoolOff + (objects.size() * 0.5)) {
 			aCounter.set(0);
-			addNewFish();
+			addNewObject();
 		}
 	}
 
-	public void addNewFish() {
+	public void addNewObject() {
 		try {
 			entities.add(objects.pop());
 		} catch (NoSuchElementException e) {
+			boolean objectsExist = false;
 			
-			//System.out.println("Score: " + score + " out of " + totalPossibleScore);
+			for(Entity entity : entities) { // Check to ensure it breaks out of loop onces found fish
+				if(entity instanceof PassingObject) {
+					objectsExist = true;
+					break;
+				}
+			}
+			
+			if(!objectsExist) {
+				Main.isPaused = true;
+				Main.outOfObjects = true;
+			}
+			// System.out.println("Score: " + score + " out of " + totalPossibleScore);
 		}
-	}
-	
-	public void outOfObjects() {
-		
 	}
 
 	/**
@@ -127,6 +139,10 @@ public class GameBoard extends Board {
 
 	public static int getScore() {
 		return score;
+	}
+	
+	public static int getTotalPointsPossible() {
+		return totalPossibleScore;
 	}
 
 }

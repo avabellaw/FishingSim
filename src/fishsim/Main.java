@@ -15,6 +15,7 @@ public class Main extends Component {
 
 	private final static int WIDTH = 200, HEIGHT = 200, SCALE = 2; // Sprite has to be adjust if size is changed
 	public final static Dimension DIMENSIONS = new Dimension(WIDTH, HEIGHT);
+	public static boolean isPaused = false, outOfObjects = false;
 
 	public static Display display = new GameDisplay(DIMENSIONS, SCALE, "Fishing Simulator !");
 	public static Board board = new StartBoard(DIMENSIONS, display);
