@@ -2,13 +2,13 @@ package fishsim;
 
 import java.awt.Dimension;
 
+import engine.core.Component;
 import engine.core.Ticker;
 import engine.core.graphics.Display;
 import fishsim.board.Board;
 import fishsim.board.GameBoard;
 import fishsim.board.StartBoard;
 import fishsim.graphics.GameDisplay;
-import engine.core.*;
 
 public class Main extends Component {
 
@@ -21,7 +21,6 @@ public class Main extends Component {
 	Ticker ticker = new Ticker(this, display, 100);
 
 	public Main() {
-
 	}
 
 	public static void main(String[] args) {

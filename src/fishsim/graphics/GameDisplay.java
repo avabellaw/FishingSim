@@ -21,6 +21,8 @@ public class GameDisplay extends Display {
 	public static boolean isMouseOnScreen = false;
 	public static boolean isMouseOutsideBorders = false, drawScore = false;;
 
+	private static Font font = new Font("Serif", Font.PLAIN, 25);
+
 	public GameDisplay(Dimension dimensions, int scale, String title) {
 		super(dimensions, scale, title);
 
@@ -79,7 +81,6 @@ public class GameDisplay extends Display {
 			return;
 		Graphics2D g2 = (Graphics2D) g;
 		g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-		Font font = new Font("Serif", Font.PLAIN, 25);
 
 		g2.setFont(font);
 		g2.drawString("Score: " + GameBoard.getScore(), 35, 25);
