@@ -11,7 +11,7 @@ public class StartBoard extends Board {
 	public StartBoard(Dimension boardSize, Display display) {
 		super(boardSize, display, StaticSprites.blueprintSprite);
 		
-		int playerX = 100, playerY = 55;
+		int playerX = 140, playerY = 76;
 		player = new Fisher(playerX, playerY, this); // Fisher player new Fisher(...)
 	}
 

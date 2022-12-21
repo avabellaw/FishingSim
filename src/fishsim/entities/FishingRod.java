@@ -2,13 +2,10 @@ package fishsim.entities;
 
 import java.awt.Color;
 
-import javax.swing.plaf.synth.SynthSeparatorUI;
-
 import engine.core.graphics.Display;
 import engine.entity.Entity;
 import fishsim.Main;
 import fishsim.board.Board;
-import fishsim.board.GameBoard;
 import fishsim.graphics.StaticSprites;
 
 public class FishingRod extends Entity {
@@ -19,16 +16,13 @@ public class FishingRod extends Entity {
 
 	public static final int WIDTH = 9, HEIGHT = 20;
 
-	private double minU, maxU, angle, U;
-	int minS = 87, maxS = 40;
-	
-	private Board board;
+	private double minU, maxU, angle;
+	int minS = 87, maxS = 40, startY;
 
 	public FishingRod(int x, int y, Board board, Fisher player, double angle) {
 		super(x - WIDTH, y - HEIGHT, WIDTH, HEIGHT, StaticSprites.fishingRodSprite);
-		
+
 		this.angle = angle;
-		this.board = board;
 
 		minS = (int) x - minS;
 		maxS = (int) x - maxS;
@@ -67,23 +61,22 @@ public class FishingRod extends Entity {
 		public FishingHook(int x, int y) {
 			super(x, y, 4, 8, StaticSprites.hookSprite);
 		}
-		
+
 		public void splash() {
-			for(int i = 0; i < pixels.length; i ++) {
+			for (int i = 0; i < pixels.length; i++) {
 				int pixel = StaticSprites.splashSprite.getSprite()[i];
-					pixels[i] = pixel;
+				pixels[i] = pixel;
 			}
-			
+
 			new Thread() {
 				public void run() {
 					try {
 						Thread.sleep(200);
 						Main.swapBoard(Main.gameBoard);
 					} catch (InterruptedException e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
-					
+
 				}
 			}.start();
 		}
@@ -94,31 +87,29 @@ public class FishingRod extends Entity {
 			if (speed < minU)
 				speed = minU;
 
-			U = speed;
-
 			startX = x;
 			startY = y;
 			hook.xSpeed = speed * Math.cos(angle * (Math.PI / 180));
 			hook.ySpeed = speed * Math.sin(angle * (Math.PI / 180));
 		}
 
-//		private double getRange() {
-//			return (Math.pow(U, 2) * Math.sin(2 * angle)) / 9.8;
-//		}
-//
-//		private double getEndTimeOfFlight() {
-//			return ((2 * U * Math.sin(angle))) / 9.8;
-//		}
+		// private double getRange() {
+		// return (Math.pow(U, 2) * Math.sin(2 * angle)) / 9.8;
+		// }
+		//
+		// private double getEndTimeOfFlight() {
+		// return ((2 * U * Math.sin(angle))) / 9.8;
+		// }
 
 		@Override
 		public void update() {
-			if (y < 64 - hook.height / 2 - 2) {
+			if (y < startY + height * 2 - 1) {
 				x = (int) (startX - (xSpeed * time));
 				y = (int) (startY - ((ySpeed * time) - (0.5 * 9.8 * Math.pow(time, 2))));
 			} else {
 				if (!hasHitWater) {
 					hook.splash();
-					
+
 					hasHitWater = true;
 				}
 			}
