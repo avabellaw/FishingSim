@@ -21,8 +21,8 @@ public class Fish extends PassingObject {
 		public final static int WIDTH = 20, HEIGHT = 18;
 
 		public PinkFish(GameBoard board) {
-			super(board, StaticSprites.pinkFishSprite, 7);
-			setSpeed(0.7);
+			super(board, StaticSprites.pinkFishSprite, 8);
+			setSpeed(0.8);
 		}
 	}
 
@@ -39,8 +39,8 @@ public class Fish extends PassingObject {
 		public final static int WIDTH = 30, HEIGHT = 24;
 
 		public ZebraFish(GameBoard board) {
-			super(board, StaticSprites.zebraFishSprite, 10);
-			setSpeed(1.2);
+			super(board, StaticSprites.zebraFishSprite, 1);
+			setSpeed(0.65);
 		}
 	}
 	
@@ -48,8 +48,8 @@ public class Fish extends PassingObject {
 		public final static int WIDTH = 29, HEIGHT = 14;
 
 		public ClownFish(GameBoard board) {
-			super(board, StaticSprites.clownFishSprite, 10);
-			setSpeed(1.2);
+			super(board, StaticSprites.clownFishSprite, 5);
+			setSpeed(1);
 		}
 	}
 }

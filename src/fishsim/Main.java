@@ -5,6 +5,7 @@ import java.awt.Dimension;
 import engine.core.Component;
 import engine.core.Ticker;
 import engine.core.graphics.Display;
+import engine.core.io.Logger;
 import fishsim.board.Board;
 import fishsim.board.GameBoard;
 import fishsim.board.StartBoard;
@@ -20,11 +21,18 @@ public class Main extends Component {
 	public static Board gameBoard = new GameBoard(DIMENSIONS, display);
 	Ticker ticker = new Ticker(this, display, 100);
 
-	public Main() {
+	public Main(int args) {
+		super(args);
 	}
 
 	public static void main(String[] args) {
-		new Main();
+		int logLevel = Logger.LIVE;
+		
+		if(args.length > 0) {
+			logLevel = Integer.parseInt(args[0]);
+		} 
+		
+		new Main(logLevel);
 	}
 
 	public static void swapBoard(Board newBoard) {

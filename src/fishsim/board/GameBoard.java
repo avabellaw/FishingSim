@@ -19,7 +19,7 @@ public class GameBoard extends Board {
 	public static FishingLine line;
 	private AtomicInteger aCounter = new AtomicInteger();
 	private static int score = 0, totalPossibleScore = 0;
-	private static int addFishCoolOff = 10;
+	private static int addFishCoolOff = 15;
 	private LinkedList<PassingObject> objects = new LinkedList<PassingObject>();
 
 	public Boundaries boundaries;
@@ -35,7 +35,20 @@ public class GameBoard extends Board {
 		entities.add(line);
 
 		for (int i = 0; i < 100; i++) {
-			Fish fish = Math.random() > 0.6 ? new Fish.PinkFish(this) : Math.random() > 0.5 ? new Fish.ZebraFish(this): new Fish.YellowFish(this);
+			Fish fish;
+			switch ((int) (Math.random() * 4)) {
+				case 0:
+					fish = new Fish.YellowFish(this);
+					break;
+				case 1:
+					fish = new Fish.PinkFish(this);
+					break;
+				case 2:
+					fish = new Fish.ClownFish(this);
+					break;
+				default:
+					fish = new Fish.ZebraFish(this);
+			}
 			fish.initialise();
 			totalPossibleScore += fish.POINTS;
 			objects.push(fish);
@@ -45,7 +58,7 @@ public class GameBoard extends Board {
 	public void update() {
 		super.update();
 
-		if (aCounter.incrementAndGet() >= addFishCoolOff + (objects.size() * 0.7)) {
+		if (aCounter.incrementAndGet() >= addFishCoolOff + (objects.size() * 0.5)) {
 			aCounter.set(0);
 			addNewFish();
 		}
