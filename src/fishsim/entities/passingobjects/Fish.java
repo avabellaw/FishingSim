@@ -42,7 +42,14 @@ public class Fish extends PassingObject {
 			super(board, StaticSprites.zebraFishSprite, 10);
 			setSpeed(1.2);
 		}
-
 	}
+	
+	public static class ClownFish extends Fish {
+		public final static int WIDTH = 29, HEIGHT = 14;
 
+		public ClownFish(GameBoard board) {
+			super(board, StaticSprites.clownFishSprite, 10);
+			setSpeed(1.2);
+		}
+	}
 }
