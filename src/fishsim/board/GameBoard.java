@@ -68,7 +68,8 @@ public class GameBoard extends Board {
 		try {
 			entities.add(objects.pop());
 		} catch (NoSuchElementException e) {
-			System.out.println("Score: " + score + " out of " + totalPossibleScore);
+			
+			//System.out.println("Score: " + score + " out of " + totalPossibleScore);
 		}
 	}
 
