@@ -11,7 +11,11 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
 
+import javax.swing.JPanel;
+
+import engine.core.Ticker;
 import engine.core.graphics.Display;
+import engine.core.graphics.MenuItem;
 import fishsim.Main;
 import fishsim.board.GameBoard;
 
@@ -26,6 +30,14 @@ public class GameDisplay extends Display {
 
 	private static Font font = new Font("Serif", Font.PLAIN, 25);
 	private static Font menuFont = new Font("Serif", Font.BOLD, 35);
+
+	private int buttonWidth = 170, buttonHeight = 45;
+	private MenuItem playAgain = new MenuItem(this.getSize().width / 2 - (buttonWidth / 2),
+			this.getSize().height / 3 + 45, buttonWidth, buttonHeight);
+	private MenuItem exit = new MenuItem(this.getSize().width / 2 - (buttonWidth / 2), playAgain.y + buttonHeight + 25,
+			buttonWidth, buttonHeight);
+
+	JPanel panel = new JPanel();
 
 	public GameDisplay(Dimension dimensions, int scale, String title) {
 		super(dimensions, scale, title);
@@ -57,6 +69,18 @@ public class GameDisplay extends Display {
 			public void mouseEntered(MouseEvent e) {
 				isMouseOnScreen = true;
 			}
+
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if (Main.outOfObjects) {
+					if (playAgain.MouseInBounds(getMousePosition())){
+						System.out.println("clicked");
+					} 
+					if(exit.MouseInBounds(getMousePosition())){
+						Ticker.close();
+					}
+				}
+			}
 		});
 	}
 
@@ -72,13 +96,19 @@ public class GameDisplay extends Display {
 
 		if (Main.outOfObjects) {
 			FontMetrics metrics = g.getFontMetrics(menuFont);
-			String str = "You scored:\n" + GameBoard.getScore() + "/" + GameBoard.getTotalPointsPossible();
-			
-			g2.setColor(new Color(0, 0, 0, 150));
+			String[] str = { "You scored:\n", GameBoard.getScore() + "/" + GameBoard.getTotalPointsPossible() };
+
+			g2.setColor(new Color(0, 0, 0, 200));
 			g2.fillRect(0, 0, this.getSize().width, this.getSize().height);
 			g2.setColor(Color.WHITE);
 			g2.setFont(menuFont);
-			g2.drawString(str,this.getSize().width / 2 - metrics.stringWidth(str) / 2, this.getSize().height / 2);
+
+			int stringX = this.getSize().width / 2, stringY = this.getSize().height / 3 - 20;
+			g2.drawString(str[0], stringX - metrics.stringWidth(str[0]) / 2, stringY);
+			g2.drawString(str[1], stringX - metrics.stringWidth(str[1]) / 2, stringY + 40);
+			
+			playAgain.draw(g2);
+			exit.draw(g2);
 		}
 
 		// if(!isMouseOnScreen) {
