@@ -6,14 +6,11 @@ import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Point;
 import java.awt.RenderingHints;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseMotionListener;
 
 import javax.swing.JPanel;
 
-import engine.core.Ticker;
 import engine.core.graphics.Display;
 import engine.core.graphics.MenuItem;
 import fishsim.Main;
@@ -23,65 +20,22 @@ public class GameDisplay extends Display {
 
 	private static final long serialVersionUID = -3314553873794350154L;
 
-	public static int mouseX = 0, mouseY = 0;
-
-	public static boolean isMouseOnScreen = false;
-	public static boolean isMouseOutsideBorders = false, drawScore = false;;
+	public static boolean drawScore = false;
 
 	private static Font font = new Font("Serif", Font.PLAIN, 25);
 	private static Font menuFont = new Font("Serif", Font.BOLD, 35);
 
 	private int buttonWidth = 170, buttonHeight = 45;
-	private MenuItem playAgain = new MenuItem(this.getSize().width / 2 - (buttonWidth / 2),
+
+	private MenuItem playAgain = new MenuItem.Button(this.getSize().width / 2 - (buttonWidth / 2),
 			this.getSize().height / 3 + 45, buttonWidth, buttonHeight);
-	private MenuItem exit = new MenuItem(this.getSize().width / 2 - (buttonWidth / 2), playAgain.y + buttonHeight + 25,
-			buttonWidth, buttonHeight);
+	private MenuItem exit = new MenuItem.Button(this.getSize().width / 2 - (buttonWidth / 2),
+			playAgain.y + buttonHeight + 25, buttonWidth, buttonHeight);
 
 	JPanel panel = new JPanel();
 
 	public GameDisplay(Dimension dimensions, int scale, String title) {
 		super(dimensions, scale, title);
-
-		addMouseMotionListener(new MouseMotionListener() {
-
-			@Override
-			public void mouseMoved(MouseEvent e) {
-				mouseX = e.getX() / scale;
-				mouseY = e.getY() / scale;
-			}
-
-			@Override
-			public void mouseDragged(MouseEvent e) {
-				// TODO Auto-generated method stub
-
-			}
-		});
-
-		addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseExited(MouseEvent e) {
-				isMouseOnScreen = false;
-				mouseX = e.getX();
-				mouseY = e.getY();
-			}
-
-			@Override
-			public void mouseEntered(MouseEvent e) {
-				isMouseOnScreen = true;
-			}
-
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				if (Main.outOfObjects) {
-					if (playAgain.MouseInBounds(getMousePosition())){
-						System.out.println("clicked");
-					} 
-					if(exit.MouseInBounds(getMousePosition())){
-						Ticker.close();
-					}
-				}
-			}
-		});
 	}
 
 	public void draw(Graphics g) {
@@ -106,7 +60,7 @@ public class GameDisplay extends Display {
 			int stringX = this.getSize().width / 2, stringY = this.getSize().height / 3 - 20;
 			g2.drawString(str[0], stringX - metrics.stringWidth(str[0]) / 2, stringY);
 			g2.drawString(str[1], stringX - metrics.stringWidth(str[1]) / 2, stringY + 40);
-			
+
 			playAgain.draw(g2);
 			exit.draw(g2);
 		}
@@ -123,6 +77,14 @@ public class GameDisplay extends Display {
 		// g2.drawString(message, this.getSize().width / 2 -
 		// metrics.stringWidth(message) / 2, (this.getSize().height) / 2);
 		// }
+	}
+
+	public boolean playAgainButtonClicked() {
+		return playAgain.isMouseInBounds(getMousePosition());
+	}
+
+	public boolean exitButtonClicked() {
+		return exit.isMouseInBounds(getMousePosition());
 	}
 
 }

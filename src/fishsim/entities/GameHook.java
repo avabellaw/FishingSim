@@ -3,9 +3,9 @@ package fishsim.entities;
 import java.awt.Point;
 
 import engine.entity.Entity;
+import fishsim.Main;
 import fishsim.board.GameBoard;
 import fishsim.board.GameBoard.Boundaries;
-import fishsim.graphics.GameDisplay;
 import fishsim.graphics.StaticSprites;
 
 public class GameHook extends Entity {
@@ -27,11 +27,11 @@ public class GameHook extends Entity {
 		xDir = 0;
 		yDir = 0;
 
-		if (GameDisplay.isMouseOnScreen) {
+		if (Main.isMouseOnScreen) {
 
-			for(int i = 0; i < speed; i++) {
+			for (int i = 0; i < speed; i++) {
 				setDirections();
-	
+
 				if (!(x + width + xDir > b.right()) && !(x + xDir < b.left()))
 					x += xDir;
 				if (!(y + height + yDir > b.bottom()) && !(y + yDir < b.top()))
@@ -49,11 +49,11 @@ public class GameHook extends Entity {
 				y++;
 		}
 	}
-	
+
 	private void setDirections() {
-		int mX = GameDisplay.mouseX;
-		int mY = GameDisplay.mouseY;
-		
+		int mX = Main.mouseX;
+		int mY = Main.mouseY;
+
 		final Point HOOK_MIDDLE = new Point(x + 4, y + 3); // Coordinates
 
 		if (HOOK_MIDDLE.x < mX)

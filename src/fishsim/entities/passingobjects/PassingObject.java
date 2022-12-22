@@ -3,9 +3,9 @@ package fishsim.entities.passingobjects;
 import engine.core.io.Logger;
 import engine.entity.Entity;
 import engine.graphics.sprites.Sprite;
+import fishsim.Main;
 import fishsim.board.GameBoard;
 import fishsim.entities.GameHook;
-import fishsim.graphics.GameDisplay;
 
 public abstract class PassingObject extends Entity {
 
@@ -13,7 +13,7 @@ public abstract class PassingObject extends Entity {
 	protected GameHook hook;
 	protected GameBoard board;
 	protected int pointsWorth = 0;
-	
+
 	public final int POINTS;
 
 	public PassingObject(GameBoard board, Sprite sprite, int points) {
@@ -24,7 +24,7 @@ public abstract class PassingObject extends Entity {
 
 		this.isVoid = true;
 	}
-	
+
 	protected void addSpeed(double speed) {
 		this.speed += speed;
 	}
@@ -38,7 +38,7 @@ public abstract class PassingObject extends Entity {
 			delta--;
 		}
 
-		if (this.isTouching(hook) && GameDisplay.isMouseOnScreen)
+		if (this.isTouching(hook) && Main.isMouseOnScreen)
 			caughtByHook();
 
 		if (this.y + height < 0) {
