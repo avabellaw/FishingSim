@@ -19,12 +19,12 @@ public class FishingLine extends Entity {
 	}
 
 	@Override
-	public void render(Display d) {
-		renderLine(d);
+	public void render(int[] pixels, int width) {
+		renderLine(pixels, width);
 	}
 
-	public void renderLine(Display d) {
-		x = d.width / 2;
+	public void renderLine(int[] displayPixels, int displayWidth) {
+		x = displayWidth/ 2;
 		y = 0;
 		int x2 = hook.x + hook.width/2, y2 = hook.y;
 
@@ -56,7 +56,7 @@ public class FishingLine extends Entity {
 		}
 		int numerator = longest >> 1;
 		for (int i = 0; i <= longest; i++) {
-			d.pixels[(int) (x + y * d.width)] = 0xff000000;
+			displayPixels[(int) (x + y * displayWidth)] = 0xff000000;
 			numerator += shortest;
 			if (!(numerator < longest)) {
 				numerator -= longest;

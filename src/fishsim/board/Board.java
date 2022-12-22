@@ -45,7 +45,7 @@ public abstract class Board extends BoardTemplate {
 		}
 
 		for (int i = 0; i < entities.size(); i++) {
-			entities.get(i).render(display);
+			entities.get(i).render(display.pixels, display.width);
 		}
 	}
 
