@@ -62,25 +62,6 @@ public class FishingRod extends Entity {
 			super(x, y, 4, 8, StaticSprites.hookSprite);
 		}
 
-		public void splash() {
-			for (int i = 0; i < pixels.length; i++) {
-				int pixel = StaticSprites.splashSprite.getSprite()[i];
-				pixels[i] = pixel;
-			}
-
-			new Thread() {
-				public void run() {
-					try {
-						Thread.sleep(200);
-						Main.swapBoard(Main.gameBoard);
-					} catch (InterruptedException e) {
-						e.printStackTrace();
-					}
-
-				}
-			}.start();
-		}
-
 		private void throwHook(double speed) {
 			if (speed > maxU)
 				speed = maxU;
@@ -103,18 +84,7 @@ public class FishingRod extends Entity {
 
 		@Override
 		public void update() {
-			if (y < startY + height * 2 - 1) {
-				x = (int) (startX - (xSpeed * time));
-				y = (int) (startY - ((ySpeed * time) - (0.5 * 9.8 * Math.pow(time, 2))));
-			} else {
-				if (!hasHitWater) {
-					hook.splash();
-
-					hasHitWater = true;
-				}
-			}
-
-			time += deltaTime;
+			
 		}
 
 	}

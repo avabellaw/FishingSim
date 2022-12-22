@@ -11,7 +11,9 @@ import engine.core.io.Logger;
 import fishsim.board.Board;
 import fishsim.board.GameBoard;
 import fishsim.board.StartBoard;
+import fishsim.entities.FishingHook;
 import fishsim.graphics.GameDisplay;
+import fishsim.graphics.StaticSprites;
 
 public class Main extends Component {
 
@@ -29,7 +31,14 @@ public class Main extends Component {
 
 	public static boolean splashFinished = false;
 	Ticker ticker = new Ticker(this, display, 100);
-
+	
+	enum State {
+		Splash,
+		Game,
+		End_Menu
+	}
+	
+	public static State state = State.Splash;
 	public Main(int args) {
 		super(args);
 
@@ -44,7 +53,6 @@ public class Main extends Component {
 
 			@Override
 			public void mouseDragged(MouseEvent e) {
-				// TODO Auto-generated method stub
 
 			}
 		});
@@ -86,19 +94,36 @@ public class Main extends Component {
 		new Main(logLevel);
 	}
 
-	public static void swapBoard(Board newBoard) {
-		board = newBoard;
-		GameDisplay.drawScore = true;
-		Main.splashFinished = true;
-	}
+//	public static void swapBoard(Board newBoard) {
+//		board = newBoard;
+//		GameDisplay.drawScore = true;
+//		Main.splashFinished = true;
+//	}
 
 	public void update() {
 		// if (GameDisplay.isMouseOnScreen || !splashFinished)
+		if (StartBoard.hasHitWater) {
+			new Thread() {
+				public void run() {
+					try {
+						Thread.sleep(200);
+						board = Main.gameBoard;
+						GameDisplay.drawScore = true;
+						Main.splashFinished = true;
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+
+				}
+			}.start();
+		}
 		board.update();
 	}
 
+	// Ticker calls - first method that is called
 	public void render() {
 		board.render();
+		//.render the buttons
 	}
 
 }

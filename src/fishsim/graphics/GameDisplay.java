@@ -6,7 +6,6 @@ import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.Point;
 import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
@@ -26,7 +25,7 @@ public class GameDisplay extends Display {
 
 	private static Font font = new Font("Serif", Font.PLAIN, 25);
 	private static Font menuFont = new Font("Serif", Font.BOLD, 35);
-	
+
 	private static BufferedImage menuBackground;
 
 	public static final int BUTTON_WIDTH = 170, BUTTON_HEIGHT = 45;
@@ -40,10 +39,10 @@ public class GameDisplay extends Display {
 
 	public GameDisplay(Dimension dimensions, int scale, String title) {
 		super(dimensions, scale, title);
-	
+
 		menuBackground = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
 		int[] pixels = ((DataBufferInt) menuBackground.getRaster().getDataBuffer()).getData();
-		for(int i = 0; i < pixels.length; i++) 
+		for (int i = 0; i < pixels.length; i++)
 			pixels[i] = new Color(0f, 0f, 0f, 0.7f).getRGB();
 	}
 
@@ -61,7 +60,8 @@ public class GameDisplay extends Display {
 			FontMetrics metrics = g.getFontMetrics(menuFont);
 			String[] str = { "You scored:\n", GameBoard.getScore() + "/" + GameBoard.getTotalPointsPossible() };
 
-			g2.drawImage(menuBackground, 0, 0, width * getScale(), height * getScale(), null);
+			// g2.drawImage(menuBackground, 0, 0, width * getScale(), height * getScale(),
+			// null);
 			g2.setColor(Color.WHITE);
 			g2.setFont(menuFont);
 
