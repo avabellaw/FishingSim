@@ -39,6 +39,7 @@ public class Main extends Component {
 			public void mouseMoved(MouseEvent e) {
 				mouseX = e.getX() / display.getScale();
 				mouseY = e.getY() / display.getScale();
+				isMouseOnScreen = true;
 			}
 
 			@Override

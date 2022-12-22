@@ -2,7 +2,6 @@ package fishsim.entities;
 
 import java.awt.Color;
 
-import engine.core.graphics.Display;
 import engine.entity.Entity;
 
 public class FishingLine extends Entity {
@@ -15,7 +14,7 @@ public class FishingLine extends Entity {
 	}
 
 	public void update() {
-		
+
 	}
 
 	@Override
@@ -24,9 +23,9 @@ public class FishingLine extends Entity {
 	}
 
 	public void renderLine(int[] displayPixels, int displayWidth) {
-		x = displayWidth/ 2;
+		x = displayWidth / 2;
 		y = 0;
-		int x2 = hook.x + hook.width/2, y2 = hook.y;
+		int x2 = hook.x + hook.width / 2, y2 = hook.y;
 
 		int w = x2 - x;
 		int h = y2 - y;

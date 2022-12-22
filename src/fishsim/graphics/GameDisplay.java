@@ -9,6 +9,7 @@ import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
+import java.awt.image.DataBufferInt;
 
 import javax.swing.JPanel;
 
@@ -41,6 +42,9 @@ public class GameDisplay extends Display {
 		super(dimensions, scale, title);
 	
 		menuBackground = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
+		int[] pixels = ((DataBufferInt) menuBackground.getRaster().getDataBuffer()).getData();
+		for(int i = 0; i < pixels.length; i++) 
+			pixels[i] = new Color(0f, 0f, 0f, 0.7f).getRGB();
 	}
 
 	public void draw(Graphics g) {
