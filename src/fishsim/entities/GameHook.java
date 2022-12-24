@@ -7,6 +7,7 @@ import fishsim.Main;
 import fishsim.board.GameBoard;
 import fishsim.board.GameBoard.Boundaries;
 import fishsim.graphics.StaticSprites;
+import io.MouseInput;
 
 public class GameHook extends Entity {
 
@@ -27,7 +28,7 @@ public class GameHook extends Entity {
 		xDir = 0;
 		yDir = 0;
 
-		if (Main.isMouseOnScreen) {
+		if (MouseInput.isMouseOnScreen) {
 
 			for (int i = 0; i < speed; i++) {
 				setDirections();
@@ -51,8 +52,8 @@ public class GameHook extends Entity {
 	}
 
 	private void setDirections() {
-		int mX = Main.mouseX;
-		int mY = Main.mouseY;
+		int mX = MouseInput.mouseX;
+		int mY = MouseInput.mouseY;
 
 		final Point HOOK_MIDDLE = new Point(x + 4, y + 3); // Coordinates
 

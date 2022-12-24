@@ -3,9 +3,9 @@ package fishsim.entities.passingobjects;
 import engine.core.io.Logger;
 import engine.entity.Entity;
 import engine.graphics.sprites.Sprite;
-import fishsim.Main;
 import fishsim.board.GameBoard;
 import fishsim.entities.GameHook;
+import io.MouseInput;
 
 public abstract class PassingObject extends Entity {
 
@@ -38,7 +38,7 @@ public abstract class PassingObject extends Entity {
 			delta--;
 		}
 
-		if (this.isTouching(hook) && Main.isMouseOnScreen)
+		if (this.isTouching(hook) && MouseInput.isMouseOnScreen)
 			caughtByHook();
 
 		if (this.y + height < 0) {
