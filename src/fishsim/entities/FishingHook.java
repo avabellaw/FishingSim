@@ -21,18 +21,6 @@ public class FishingHook extends Entity {
 			int pixel = StaticSprites.splashSprite.getSprite()[i];
 			pixels[i] = pixel;
 		}
-
-		new Thread() {
-			public void run() {
-				try {
-					Thread.sleep(200);
-					Main.swapBoard(Main.gameBoard);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
-
-			}
-		}.start();
 	}
 
 	@Override

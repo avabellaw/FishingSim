@@ -29,6 +29,14 @@ public class Main extends Component {
 
 	public static boolean splashFinished = false;
 	Ticker ticker = new Ticker(this, display, 100);
+	
+	public enum State {
+		Splash,
+		Game,
+		Menu
+	}
+	
+	public static State gameState = State.Splash;
 
 	public Main(int args) {
 		super(args);
@@ -85,16 +93,26 @@ public class Main extends Component {
 
 		new Main(logLevel);
 	}
-
-	public static void swapBoard(Board newBoard) {
-		board = newBoard;
-		GameDisplay.drawScore = true;
-		Main.splashFinished = true;
-	}
-
-	public void update() {
-		// if (GameDisplay.isMouseOnScreen || !splashFinished)
+	
+	public void update() {		
 		board.update();
+	}
+	
+	public static void changeGameState(State state) {
+		if(gameState == State.Splash && state == State.Game) {
+			 Runnable r1 = () -> {
+				try {
+					Thread.sleep(200);
+					board = Main.gameBoard;
+					GameDisplay.drawScore = true;
+					Main.splashFinished = true;
+				} catch (InterruptedException e) {
+					Logger.error("Thread.sleep interupted when changing to '" + state + "'");
+				}
+			};
+			
+			new Thread(r1).start();
+		}
 	}
 
 	public void render() {

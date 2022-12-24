@@ -5,6 +5,7 @@ import java.awt.Color;
 import engine.core.graphics.Display;
 import engine.entity.Entity;
 import fishsim.Main;
+import fishsim.Main.State;
 import fishsim.board.Board;
 import fishsim.graphics.StaticSprites;
 
@@ -67,18 +68,8 @@ public class FishingRod extends Entity {
 				int pixel = StaticSprites.splashSprite.getSprite()[i];
 				pixels[i] = pixel;
 			}
-
-			new Thread() {
-				public void run() {
-					try {
-						Thread.sleep(200);
-						Main.swapBoard(Main.gameBoard);
-					} catch (InterruptedException e) {
-						e.printStackTrace();
-					}
-
-				}
-			}.start();
+			
+			Main.changeGameState(Main.State.Game);
 		}
 
 		private void throwHook(double speed) {
