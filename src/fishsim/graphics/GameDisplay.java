@@ -63,7 +63,7 @@ public class GameDisplay extends Display {
 
 		g2.drawString("Score: " + GameBoard.getScore(), 35, 25);
 
-		if (Main.outOfObjects) {
+		if (Main.gameState == Main.State.Menu) {
 			FontMetrics metrics = g.getFontMetrics(menuFont);
 			String[] str = { "You scored:\n", GameBoard.getScore() + "/" + GameBoard.getTotalPointsPossible() };
 

@@ -69,7 +69,7 @@ public class FishingRod extends Entity {
 				pixels[i] = pixel;
 			}
 			
-			Main.changeGameState(Main.State.Game);
+			Main.goToGame();
 		}
 
 		private void throwHook(double speed) {

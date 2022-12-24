@@ -9,13 +9,11 @@ import fishsim.board.Board;
 import fishsim.board.GameBoard;
 import fishsim.board.StartBoard;
 import fishsim.graphics.GameDisplay;
-import io.MouseInput;
 
 public class Main extends Component {
 
 	private final static int WIDTH = 200, HEIGHT = 200, SCALE = 2; // Sprite has to be adjust if size is changed
 	public final static Dimension DIMENSIONS = new Dimension(WIDTH, HEIGHT);
-	public static boolean isPaused = false, outOfObjects = false;
 
 	public static GameDisplay display = new GameDisplay(DIMENSIONS, SCALE, "Fishing Simulator !");
 	public static Board board = new StartBoard(DIMENSIONS, display);
@@ -47,9 +45,15 @@ public class Main extends Component {
 	public void update() {
 		board.update();
 	}
-
-	public static void changeGameState(State state) {
-		if (gameState == State.Splash && state == State.Game) {
+	
+	public static void goToMenu() {
+		if(gameState == State.Game) {
+			gameState = State.Menu;
+		}
+	}
+	
+	public static void goToGame() {
+		if (gameState == State.Splash) {
 			Runnable r1 = () -> {
 				try {
 					Thread.sleep(200);
@@ -58,7 +62,7 @@ public class Main extends Component {
 					Main.splashFinished = true;
 					gameState = State.Game;
 				} catch (InterruptedException e) {
-					Logger.error("Thread.sleep interupted when changing to '" + state + "'");
+					Logger.error("Thread.sleep interupted when changing to game state");
 				}
 			};
 
@@ -68,6 +72,17 @@ public class Main extends Component {
 
 	public void render() {
 		board.render();
+	}
+	
+	public static void mouseClicked() {
+		if (gameState == State.Menu) {
+			if (display.playAgainButtonClicked()) {
+				System.out.println("clicked");
+			}
+			if (display.exitButtonClicked()) {
+				Ticker.close();
+			}
+		}
 	}
 
 }

@@ -6,6 +6,7 @@ import java.util.NoSuchElementException;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import engine.core.graphics.Display;
+import engine.core.io.Logger;
 import engine.entity.Entity;
 import fishsim.Main;
 import fishsim.entities.FishingLine;
@@ -17,11 +18,13 @@ import fishsim.graphics.StaticSprites;
 
 public class GameBoard extends Board {
 
+	private int tempCounter = 1;
+	
 	public GameHook gHook;
 	public static FishingLine line;
 	private AtomicInteger aCounter = new AtomicInteger();
 	private static int score = 0, totalPossibleScore = 0;
-	private static int addFishCoolOff = 12, fishAmount = 10;
+	private static int addFishCoolOff = 12, fishAmount = 15;
 	private LinkedList<PassingObject> objects = new LinkedList<PassingObject>();
 
 	public Boundaries boundaries;
@@ -52,13 +55,12 @@ public class GameBoard extends Board {
 				fish = new Fish.ZebraFish(this);
 			}
 			fish.initialise();
-			totalPossibleScore += fish.POINTS;
 			objects.push(fish);
 		}
 	}
 
 	public void update() {
-		if(Main.isPaused) return;
+		if(Main.gameState == Main.State.Splash || Main.gameState == Main.State.Menu) return;
 		
 		super.update();
 
@@ -67,25 +69,28 @@ public class GameBoard extends Board {
 			addNewObject();
 		}
 	}
+	
+	private void checkForObjects() {
+		boolean objectsExist = false;
+		
+		for(Entity entity : entities) { // Check to ensure it breaks out of loop onces found fish
+			if(entity instanceof PassingObject) {
+				objectsExist = true;
+				break;
+			}
+		}
+		
+		if(!objectsExist) {
+			Main.goToMenu();
+		}
+	}
 
 	public void addNewObject() {
 		try {
 			entities.add(objects.pop());
 		} catch (NoSuchElementException e) {
-			boolean objectsExist = false;
-			
-			for(Entity entity : entities) { // Check to ensure it breaks out of loop onces found fish
-				if(entity instanceof PassingObject) {
-					objectsExist = true;
-					break;
-				}
-			}
-			
-			if(!objectsExist) {
-				Main.isPaused = true;
-				Main.outOfObjects = true;
-			}
-			// System.out.println("Score: " + score + " out of " + totalPossibleScore);
+			//Logger.info("Tried to add new object but out of LinkedList is empty.");
+			checkForObjects();
 		}
 	}
 
@@ -143,6 +148,10 @@ public class GameBoard extends Board {
 	
 	public static int getTotalPointsPossible() {
 		return totalPossibleScore;
+	}
+	
+	public static void addToTotalPossibleScore(int num) {
+		totalPossibleScore += num;
 	}
 
 }

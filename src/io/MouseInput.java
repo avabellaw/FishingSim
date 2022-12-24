@@ -40,13 +40,6 @@ public class MouseInput extends MouseAdapter {
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		if (Main.outOfObjects) {
-			if (display.playAgainButtonClicked()) {
-				System.out.println("clicked");
-			}
-			if (display.exitButtonClicked()) {
-				Ticker.close();
-			}
-		}
+		Main.mouseClicked();
 	}
 }

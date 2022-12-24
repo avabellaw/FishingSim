@@ -48,5 +48,9 @@ public abstract class Board extends BoardTemplate {
 			entities.get(i).render(display.pixels, display.width);
 		}
 	}
+	
+	public void mouseClicked() {
+		
+	}
 
 }
