@@ -55,7 +55,7 @@ public class GameDisplay extends Display {
 			FontMetrics metrics = g.getFontMetrics(menuFont);
 			String[] str = { "You scored:\n", ((GameBoard) Main.board).getScore() + "/" + ((GameBoard) Main.board).getTotalPointsPossible() };
 
-			g2.drawImage(menu.getImage(), 0, 0, width * getScale(), height * getScale(), null);
+			//g2.drawImage(menu.getImage(), 0, 0, width * getScale(), height * getScale(), null);
 			g2.setColor(Color.WHITE);
 			g2.setFont(menuFont);
 

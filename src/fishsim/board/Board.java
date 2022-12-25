@@ -5,6 +5,7 @@ import java.awt.Dimension;
 import engine.BoardTemplate;
 import engine.core.graphics.Display;
 import engine.graphics.sprites.Sprite;
+import fishsim.Main;
 import fishsim.entities.startboard.Fisher;
 
 public abstract class Board extends BoardTemplate {
@@ -41,7 +42,8 @@ public abstract class Board extends BoardTemplate {
 	@Override
 	public void render() {
 		for (int i = 0; i < boardPixels.length; i++) {
-			display.pixels[i] = boardPixels[i];
+			if(Main.gameState == Main.State.Menu) display.pixels[i] = boardPixels[i]+ 100; else
+				display.pixels[i] = boardPixels[i];
 		}
 
 		for (int i = 0; i < entities.size(); i++) {
