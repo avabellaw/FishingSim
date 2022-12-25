@@ -42,9 +42,8 @@ public abstract class Board extends BoardTemplate {
 
 	@Override
 	public void render() {
-
 		if (Main.gameState == Main.State.Menu)
-			GameDisplay.menu.render(display.pixels);
+			Main.display.menu.render(display.pixels);
 		else {
 			for (int i = 0; i < boardPixels.length; i++) {
 				display.pixels[i] = boardPixels[i];

@@ -48,7 +48,7 @@ public class Main extends Component {
 
 	public static void goToMenu() {
 		if (gameState == State.Game) {
-			GameDisplay.menu.init(display.pixels);
+			display.menu.init(display.pixels);
 			gameState = State.Menu;
 		}
 	}
@@ -82,7 +82,7 @@ public class Main extends Component {
 
 	public static void mouseClicked(Point mousePoint) {
 		if (gameState == State.Menu) {
-			GameDisplay.menu.click(mousePoint);
+			display.menu.click(mousePoint);
 		}
 	}
 

@@ -26,7 +26,7 @@ public class GameDisplay extends Display {
 	private static Font font = new Font("Serif", Font.PLAIN, 25);
 	private static Font menuFont = new Font("Serif", Font.BOLD, 35);
 
-	public static Menu menu;
+	public Menu menu;
 
 	JPanel panel = new JPanel();
 
