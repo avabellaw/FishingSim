@@ -1,12 +1,13 @@
 package fishsim.entities.startboard;
 
+import engine.core.io.Logger;
 import engine.entity.Entity;
 import fishsim.board.Board;
 
 public class Fisher extends Entity {
 
 	private FishingRod rod;
-	
+
 	public static int width = 5, height = 8;
 
 	public Fisher(int x, int y, Board board) {
@@ -15,12 +16,18 @@ public class Fisher extends Entity {
 		rod = new FishingRod(x, y + height, board, this, 45);
 
 		board.entities.add(this);
-		board.entities.add(rod);
-		rod.initRod(board);
-	} 
-	
+	}
+
 	@Override
 	public void update() {
+		rod.update();
+	}
+	
+	@Override
+	public void render(int[] displayPixels, int displayWidth) {
+		// TODO Auto-generated method stub
+		super.render(displayPixels, displayWidth);
+		rod.render(displayPixels, displayWidth);
 	}
 
 }

@@ -18,7 +18,7 @@ public class Main extends Component {
 	public final static Dimension DIMENSIONS = new Dimension(WIDTH, HEIGHT);
 
 	public static GameDisplay display = new GameDisplay(DIMENSIONS, SCALE, "Fishing Simulator !");
-	public static Board board = new StartBoard(DIMENSIONS, display);
+	public static Board board;
 
 	Ticker ticker = new Ticker(this, display, 100);
 
@@ -83,6 +83,11 @@ public class Main extends Component {
 		if (gameState == State.Menu) {
 			GameDisplay.menu.click(mousePoint);
 		}
+	}
+
+	@Override
+	public void init() {
+		board = new StartBoard(DIMENSIONS, display);
 	}
 
 }

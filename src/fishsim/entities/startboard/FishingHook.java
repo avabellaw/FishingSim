@@ -1,5 +1,6 @@
 package fishsim.entities.startboard;
 
+import engine.core.io.Logger;
 import engine.entity.Entity;
 import fishsim.graphics.StaticSprites;
 

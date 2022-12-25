@@ -2,10 +2,7 @@ package fishsim.entities.startboard;
 
 import java.awt.Color;
 
-import engine.core.graphics.Display;
 import engine.entity.Entity;
-import fishsim.Main;
-import fishsim.Main.State;
 import fishsim.board.Board;
 import fishsim.graphics.StaticSprites;
 
@@ -38,14 +35,18 @@ public class FishingRod extends Entity {
 		hook.throwHook(20);
 	}
 
-	public void initRod(Board board) {
-		board.entities.add(hook);
-		board.entities.add(line);
-	}
-
 	@Override
 	public void update() {
 		line.update();
+		hook.update();
+	}
+
+	@Override
+	public void render(int[] displayPixels, int displayWidth) {
+		super.render(displayPixels, displayWidth);
+
+		line.render(displayPixels, displayWidth);
+		hook.render(displayPixels, displayWidth);
 	}
 
 	// Minimum speed (minU) is 6.62
@@ -83,9 +84,27 @@ public class FishingRod extends Entity {
 		// return ((2 * U * Math.sin(angle))) / 9.8;
 		// }
 
-		@Override
 		public void update() {
-			
+			if (y < 164 - height / 2 - 2) {
+				x = (int) (startX - (xSpeed * time));
+				y = (int) (startY - ((ySpeed * time) - (0.5 * 9.8 * Math.pow(time, 2))));
+			} else {
+				if (!hasHitWater) {
+					splash();
+
+					hasHitWater = true;
+				}
+			}
+
+			time += deltaTime;
+		}
+
+		private void splash() {
+			System.out.println("aksjdhfiajhdfkjn");
+			// for (int i = 0; i < display.pixels.length; i++) {
+			// int pixel = StaticSprites.splashSprite.getSprite()[i];
+			// display.pixels[i] = pixel;
+			// }
 		}
 
 	}

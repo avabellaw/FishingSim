@@ -4,6 +4,7 @@ import java.awt.Dimension;
 
 import engine.BoardTemplate;
 import engine.core.graphics.Display;
+import engine.core.io.Logger;
 import engine.graphics.sprites.Sprite;
 import fishsim.Main;
 import fishsim.entities.startboard.Fisher;
