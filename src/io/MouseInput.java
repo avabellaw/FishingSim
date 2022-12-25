@@ -24,6 +24,10 @@ public class MouseInput extends MouseAdapter {
 		mouseX = e.getX() / display.getScale();
 		mouseY = e.getY() / display.getScale();
 		isMouseOnScreen = true;
+		
+		if(Main.gameState == Main.State.Menu) {
+			display.menu.mouseMoved(new Point(mouseX, mouseY));
+		}
 	}
 
 	@Override

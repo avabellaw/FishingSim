@@ -15,5 +15,10 @@ public class PlayAgain extends MenuItem.Button {
 	public void click() {
 		Main.goToGame();
 	}
+	
+	@Override
+	public void onHover() {
+		System.out.println("kjshfkdjs");
+	}
 
 }

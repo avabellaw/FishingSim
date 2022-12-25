@@ -7,7 +7,6 @@ import engine.core.graphics.Display;
 import engine.graphics.sprites.Sprite;
 import fishsim.Main;
 import fishsim.entities.startboard.Fisher;
-import fishsim.graphics.GameDisplay;
 
 public abstract class Board extends BoardTemplate {
 

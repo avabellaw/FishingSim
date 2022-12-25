@@ -11,7 +11,6 @@ import java.awt.RenderingHints;
 import javax.swing.JPanel;
 
 import engine.core.graphics.Display;
-import engine.core.graphics.Menu;
 import fishsim.Main;
 import fishsim.board.GameBoard;
 import fishsim.entities.menu.EndMenu;
@@ -26,7 +25,7 @@ public class GameDisplay extends Display {
 	private static Font font = new Font("Serif", Font.PLAIN, 25);
 	private static Font menuFont = new Font("Serif", Font.BOLD, 35);
 
-	public Menu menu;
+	public EndMenu menu;
 
 	JPanel panel = new JPanel();
 
