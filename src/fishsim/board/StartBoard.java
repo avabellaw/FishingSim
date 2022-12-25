@@ -3,7 +3,7 @@ package fishsim.board;
 import java.awt.Dimension;
 
 import engine.core.graphics.Display;
-import fishsim.entities.Fisher;
+import fishsim.entities.startboard.Fisher;
 import fishsim.graphics.StaticSprites;
 
 public class StartBoard extends Board {

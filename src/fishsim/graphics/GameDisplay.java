@@ -12,10 +12,9 @@ import javax.swing.JPanel;
 
 import engine.core.graphics.Display;
 import engine.core.graphics.Menu;
-import engine.core.graphics.MenuItem;
 import fishsim.Main;
 import fishsim.board.GameBoard;
-import fishsim.entities.EndMenu;
+import fishsim.entities.menu.EndMenu;
 import io.MouseInput;
 
 public class GameDisplay extends Display {
@@ -50,11 +49,11 @@ public class GameDisplay extends Display {
 
 		g2.setFont(font);
 
-		g2.drawString("Score: " + GameBoard.getScore(), 35, 25);
+		if(Main.gameState == Main.State.Game) g2.drawString("Score: " + ((GameBoard) Main.board).getScore(), 35, 25);
 
 		if (Main.gameState == Main.State.Menu) {
 			FontMetrics metrics = g.getFontMetrics(menuFont);
-			String[] str = { "You scored:\n", GameBoard.getScore() + "/" + GameBoard.getTotalPointsPossible() };
+			String[] str = { "You scored:\n", ((GameBoard) Main.board).getScore() + "/" + ((GameBoard) Main.board).getTotalPointsPossible() };
 
 			g2.drawImage(menu.getImage(), 0, 0, width * getScale(), height * getScale(), null);
 			g2.setColor(Color.WHITE);

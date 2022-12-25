@@ -8,20 +8,18 @@ import java.util.concurrent.atomic.AtomicInteger;
 import engine.core.graphics.Display;
 import engine.entity.Entity;
 import fishsim.Main;
-import fishsim.entities.FishingLine;
 import fishsim.entities.GameHook;
 import fishsim.entities.passingobjects.Fish;
 import fishsim.entities.passingobjects.PassingObject;
+import fishsim.entities.startboard.FishingLine;
 import fishsim.graphics.StaticSprites;
 
 public class GameBoard extends Board {
 
-	private int tempCounter = 1;
-
 	public GameHook gHook;
 	public static FishingLine line;
 	private AtomicInteger aCounter = new AtomicInteger();
-	private static int score = 0, totalPossibleScore = 0;
+	private int score = 0, totalPossibleScore = 0;
 	private static int addFishCoolOff = 12, fishAmount = 15;
 	private LinkedList<PassingObject> objects = new LinkedList<PassingObject>();
 
@@ -37,24 +35,7 @@ public class GameBoard extends Board {
 		line = new FishingLine(gHook);
 		entities.add(line);
 
-		for (int i = 0; i < fishAmount; i++) {
-			Fish fish;
-			switch ((int) (Math.random() * 4)) {
-			case 0:
-				fish = new Fish.YellowFish(this);
-				break;
-			case 1:
-				fish = new Fish.PinkFish(this);
-				break;
-			case 2:
-				fish = new Fish.ClownFish(this);
-				break;
-			default:
-				fish = new Fish.ZebraFish(this);
-			}
-			fish.initialise();
-			objects.push(fish);
-		}
+		init();
 	}
 
 	public void update() {
@@ -80,6 +61,7 @@ public class GameBoard extends Board {
 		}
 
 		if (!objectsExist) {
+			Main.lastScore = score;
 			Main.goToMenu();
 		}
 	}
@@ -137,20 +119,41 @@ public class GameBoard extends Board {
 
 	}
 
-	public static void addPoints(int points) {
+	public void addPoints(int points) {
 		score += points;
 	}
 
-	public static int getScore() {
+	public int getScore() {
 		return score;
 	}
 
-	public static int getTotalPointsPossible() {
+	public int getTotalPointsPossible() {
 		return totalPossibleScore;
 	}
 
-	public static void addToTotalPossibleScore(int num) {
+	public void addToTotalPossibleScore(int num) {
 		totalPossibleScore += num;
+	}
+	
+	public void init() {
+		for (int i = 0; i < fishAmount; i++) {
+			Fish fish;
+			switch ((int) (Math.random() * 4)) {
+			case 0:
+				fish = new Fish.YellowFish(this);
+				break;
+			case 1:
+				fish = new Fish.PinkFish(this);
+				break;
+			case 2:
+				fish = new Fish.ClownFish(this);
+				break;
+			default:
+				fish = new Fish.ZebraFish(this);
+			}
+			fish.initialise();
+			objects.push(fish);
+		}
 	}
 
 }

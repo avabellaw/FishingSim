@@ -5,9 +5,9 @@ import java.awt.Dimension;
 import engine.graphics.sprites.Sprite;
 import engine.graphics.sprites.Spritesheet;
 import fishsim.Main;
-import fishsim.entities.FishingRod;
 import fishsim.entities.GameHook;
 import fishsim.entities.passingobjects.Fish;
+import fishsim.entities.startboard.FishingRod;
 
 public class StaticSprites {
 

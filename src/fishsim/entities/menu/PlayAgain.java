@@ -1,7 +1,8 @@
-package fishsim.entities;
+package fishsim.entities.menu;
 
 import engine.core.graphics.MenuItem;
 import engine.graphics.sprites.Sprite;
+import fishsim.Main;
 import fishsim.graphics.StaticSprites;
 
 public class PlayAgain extends MenuItem.Button {
@@ -12,7 +13,7 @@ public class PlayAgain extends MenuItem.Button {
 	}
 	
 	public void click() {
-		System.out.println("afsjhfalksf");
+		Main.goToGame();
 	}
 
 }

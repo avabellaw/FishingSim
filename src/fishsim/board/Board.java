@@ -5,7 +5,7 @@ import java.awt.Dimension;
 import engine.BoardTemplate;
 import engine.core.graphics.Display;
 import engine.graphics.sprites.Sprite;
-import fishsim.entities.Fisher;
+import fishsim.entities.startboard.Fisher;
 
 public abstract class Board extends BoardTemplate {
 

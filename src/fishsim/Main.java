@@ -14,11 +14,11 @@ import fishsim.graphics.GameDisplay;
 public class Main extends Component {
 
 	private final static int WIDTH = 200, HEIGHT = 200, SCALE = 2; // Sprite has to be adjust if size is changed
+	public static int lastScore = 0;
 	public final static Dimension DIMENSIONS = new Dimension(WIDTH, HEIGHT);
 
 	public static GameDisplay display = new GameDisplay(DIMENSIONS, SCALE, "Fishing Simulator !");
 	public static Board board = new StartBoard(DIMENSIONS, display);
-	public static Board gameBoard = new GameBoard(DIMENSIONS, display);
 
 	public static boolean splashFinished = false;
 	Ticker ticker = new Ticker(this, display, 100);
@@ -58,17 +58,21 @@ public class Main extends Component {
 			Runnable r1 = () -> {
 				try {
 					Thread.sleep(200);
-					board = Main.gameBoard;
+					board = new GameBoard(DIMENSIONS, display);
 					GameDisplay.drawScore = true;
 					Main.splashFinished = true;
-					gameState = State.Game;
 				} catch (InterruptedException e) {
 					Logger.error("Thread.sleep interupted when changing to game state");
 				}
 			};
 
 			new Thread(r1).start();
+		} else if(gameState == State.Menu) {
+			board = new GameBoard(DIMENSIONS, display);
+			((GameBoard) board).init();
 		}
+		
+		gameState = State.Game;
 	}
 
 	public void render() {
