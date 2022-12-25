@@ -20,7 +20,7 @@ public class GameBoard extends Board {
 	public static FishingLine line;
 	private AtomicInteger aCounter = new AtomicInteger();
 	private int score = 0, totalPossibleScore = 0;
-	private static int addFishCoolOff = 12, fishAmount = 15;
+	private static int addFishCoolOff = 12, fishAmount = 2;
 	private LinkedList<PassingObject> objects = new LinkedList<PassingObject>();
 
 	public Boundaries boundaries;

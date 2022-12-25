@@ -8,6 +8,7 @@ import engine.core.io.Logger;
 import engine.graphics.sprites.Sprite;
 import fishsim.Main;
 import fishsim.entities.startboard.Fisher;
+import fishsim.graphics.GameDisplay;
 
 public abstract class Board extends BoardTemplate {
 
@@ -43,13 +44,14 @@ public abstract class Board extends BoardTemplate {
 	@Override
 	public void render() {
 		for (int i = 0; i < boardPixels.length; i++) {
-			if(Main.gameState == Main.State.Menu) display.pixels[i] = boardPixels[i]+ 100; else
 				display.pixels[i] = boardPixels[i];
 		}
-
+		
 		for (int i = 0; i < entities.size(); i++) {
 			entities.get(i).render(display.pixels, display.width);
 		}
+
+		if(Main.gameState == Main.State.Menu) GameDisplay.menu.render(display.pixels);
 	}
 	
 	public void mouseClicked() {

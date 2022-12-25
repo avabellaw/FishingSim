@@ -34,7 +34,7 @@ public class GameDisplay extends Display {
 
 	public GameDisplay(Dimension dimensions, int scale, String title) {
 		super(dimensions, scale, title);
-		menu = new EndMenu(dimensions.width, dimensions.height);
+		menu = new EndMenu(this);
 
 		mouseInput = new MouseInput(this);
 		addMouseListener(mouseInput);
@@ -42,28 +42,27 @@ public class GameDisplay extends Display {
 	}
 
 	public void draw(Graphics g) {
-		if (!drawScore)
+		if (Main.gameState == Main.State.Splash)
 			return;
 		Graphics2D g2 = (Graphics2D) g;
 		g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
 		g2.setFont(font);
 
-		if(Main.gameState == Main.State.Game) g2.drawString("Score: " + ((GameBoard) Main.board).getScore(), 35, 25);
+		if (Main.gameState == Main.State.Game && drawScore)
+			g2.drawString("Score: " + ((GameBoard) Main.board).getScore(), 35, 25);
 
 		if (Main.gameState == Main.State.Menu) {
 			FontMetrics metrics = g.getFontMetrics(menuFont);
-			String[] str = { "You scored:\n", ((GameBoard) Main.board).getScore() + "/" + ((GameBoard) Main.board).getTotalPointsPossible() };
+			String[] str = { "You scored:\n",
+					((GameBoard) Main.board).getScore() + "/" + ((GameBoard) Main.board).getTotalPointsPossible() };
 
-			//g2.drawImage(menu.getImage(), 0, 0, width * getScale(), height * getScale(), null);
 			g2.setColor(Color.WHITE);
 			g2.setFont(menuFont);
 
 			int stringX = this.getSize().width / 2, stringY = this.getSize().height / 3 - 20;
 			g2.drawString(str[0], stringX - metrics.stringWidth(str[0]) / 2, stringY);
 			g2.drawString(str[1], stringX - metrics.stringWidth(str[1]) / 2, stringY + 40);
-
-			menu.render();
 		}
 
 		// if(!isMouseOnScreen) {

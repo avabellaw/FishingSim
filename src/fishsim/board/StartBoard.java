@@ -15,6 +15,17 @@ public class StartBoard extends Board {
 
 		int playerX = 140, playerY = 76;
 		player = new Fisher(playerX, playerY, this); // Fisher player new Fisher(...)
+		entities.add(player);
+	}
+	
+	@Override
+	public void update() {
+		super.update();
+	}
+	
+	@Override
+	public void render() {
+		super.render();
 	}
 
 }

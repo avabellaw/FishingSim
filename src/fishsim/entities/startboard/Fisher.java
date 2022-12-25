@@ -13,8 +13,6 @@ public class Fisher extends Entity {
 		super(x, y, width, height);
 
 		rod = new FishingRod(x, y + height, board, this, 45);
-
-		board.entities.add(this);
 	}
 
 	@Override
