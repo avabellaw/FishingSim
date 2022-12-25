@@ -1,4 +1,4 @@
-package fishsim.entities;
+package fishsim.entities.startboard;
 
 import engine.entity.Entity;
 import fishsim.graphics.StaticSprites;

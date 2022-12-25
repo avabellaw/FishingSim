@@ -5,9 +5,9 @@ import java.awt.Dimension;
 import engine.graphics.sprites.Sprite;
 import engine.graphics.sprites.Spritesheet;
 import fishsim.Main;
-import fishsim.entities.FishingRod;
 import fishsim.entities.GameHook;
 import fishsim.entities.passingobjects.Fish;
+import fishsim.entities.startboard.FishingRod;
 
 public class StaticSprites {
 
@@ -34,13 +34,18 @@ public class StaticSprites {
 	public final static Sprite pinkFishSprite = new Sprite(0, 132, Fish.PinkFish.WIDTH,
 			Fish.PinkFish.HEIGHT, mainSpritesheet);
 	public final static Sprite yellowFishSprite = new Sprite(pinkFishSprite.positionRight(),
-			MAIN.height - Fish.YellowFish.HEIGHT, Fish.YellowFish.WIDTH, Fish.YellowFish.HEIGHT, mainSpritesheet);
+			pinkFishSprite.samePosition().y, Fish.YellowFish.WIDTH, Fish.YellowFish.HEIGHT, mainSpritesheet);
 	public final static Sprite zebraFishSprite = new Sprite(0, pinkFishSprite.positionAbove(Fish.ZebraFish.HEIGHT),
 			Fish.ZebraFish.WIDTH, Fish.ZebraFish.HEIGHT, mainSpritesheet);
 	public final static Sprite clownFishSprite = new Sprite(0, zebraFishSprite.positionAbove(Fish.ClownFish.HEIGHT),
 			Fish.ClownFish.WIDTH, Fish.ClownFish.HEIGHT, mainSpritesheet);
 	
 	// Buttons
-	public final static Sprite buttonSprite = new Sprite(0, pinkFishSprite.positionUnder(), GameDisplay.BUTTON_WIDTH,
-			GameDisplay.BUTTON_HEIGHT, mainSpritesheet);
+	public static final int BUTTON_WIDTH = 127, BUTTON_HEIGHT = 33;
+	public final static Sprite buttonSprite = new Sprite(0, pinkFishSprite.positionUnder(), BUTTON_WIDTH,
+			BUTTON_HEIGHT, mainSpritesheet);
+	public final static Sprite playAgainText = new Sprite(0, buttonSprite.positionUnder(),98,
+			15, mainSpritesheet);
+	public final static Sprite exitText = new Sprite(0, playAgainText.positionUnder(),35,
+			12, mainSpritesheet);
 }

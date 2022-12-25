@@ -3,18 +3,20 @@ package fishsim.entities.passingobjects;
 import engine.core.io.Logger;
 import engine.entity.Entity;
 import engine.graphics.sprites.Sprite;
-import fishsim.Main;
 import fishsim.board.GameBoard;
 import fishsim.entities.GameHook;
+import io.MouseInput;
 
 public abstract class PassingObject extends Entity {
 
-	private double speed = 0.6, delta = 0.0;
+	private double speed = 0.7, delta = 0.0;
 	protected GameHook hook;
 	protected GameBoard board;
 	protected int pointsWorth = 0;
 
 	public final int POINTS;
+
+	public static int totalPassingObjects = 0, totalPossibleScore = 0;
 
 	public PassingObject(GameBoard board, Sprite sprite, int points) {
 		super(board.BOARD_SIZE.width / 2, board.BOARD_SIZE.height, sprite);
@@ -23,6 +25,9 @@ public abstract class PassingObject extends Entity {
 		this.hook = board.gHook;
 
 		this.isVoid = true;
+
+		totalPassingObjects++;
+		board.addToTotalPossibleScore(points);
 	}
 
 	protected void addSpeed(double speed) {
@@ -38,7 +43,7 @@ public abstract class PassingObject extends Entity {
 			delta--;
 		}
 
-		if (this.isTouching(hook) && Main.isMouseOnScreen)
+		if (this.isTouching(hook) && MouseInput.isMouseOnScreen)
 			caughtByHook();
 
 		if (this.y + height < 0) {

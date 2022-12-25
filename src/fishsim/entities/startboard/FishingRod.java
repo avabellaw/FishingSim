@@ -1,10 +1,11 @@
-package fishsim.entities;
+package fishsim.entities.startboard;
 
 import java.awt.Color;
 
 import engine.core.graphics.Display;
 import engine.entity.Entity;
 import fishsim.Main;
+import fishsim.Main.State;
 import fishsim.board.Board;
 import fishsim.graphics.StaticSprites;
 

@@ -5,7 +5,7 @@ import java.awt.Dimension;
 import engine.BoardTemplate;
 import engine.core.graphics.Display;
 import engine.graphics.sprites.Sprite;
-import fishsim.entities.Fisher;
+import fishsim.entities.startboard.Fisher;
 
 public abstract class Board extends BoardTemplate {
 
@@ -47,6 +47,10 @@ public abstract class Board extends BoardTemplate {
 		for (int i = 0; i < entities.size(); i++) {
 			entities.get(i).render(display.pixels, display.width);
 		}
+	}
+	
+	public void mouseClicked() {
+		
 	}
 
 }

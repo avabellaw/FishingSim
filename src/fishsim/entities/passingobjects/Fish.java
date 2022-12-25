@@ -12,7 +12,7 @@ public class Fish extends PassingObject {
 
 	@Override
 	protected void caughtByHook() {
-		GameBoard.addPoints(POINTS);
+		board.addPoints(POINTS);
 		removePassingObject();
 	}
 
@@ -22,7 +22,7 @@ public class Fish extends PassingObject {
 
 		public PinkFish(GameBoard board) {
 			super(board, StaticSprites.pinkFishSprite, 10);
-			addSpeed(0.6);
+			addSpeed(0.5);
 		}
 	}
 
@@ -30,7 +30,7 @@ public class Fish extends PassingObject {
 		public final static int WIDTH = 19, HEIGHT = 18;
 
 		public YellowFish(GameBoard board) {
-			super(board, StaticSprites.yellowFishSprite, 7);
+			super(board, StaticSprites.yellowFishSprite, 4);
 			addSpeed(0.1);
 		}
 
@@ -41,16 +41,16 @@ public class Fish extends PassingObject {
 
 		public ZebraFish(GameBoard board) {
 			super(board, StaticSprites.zebraFishSprite, 1);
-			addSpeed(0.5);
+			addSpeed(0.4);
 		}
 	}
-	
+
 	public static class ClownFish extends Fish {
 		public final static int WIDTH = 29, HEIGHT = 14;
 
 		public ClownFish(GameBoard board) {
 			super(board, StaticSprites.clownFishSprite, 5);
-			addSpeed(0.4);
+			addSpeed(0.3);
 		}
 	}
 }
