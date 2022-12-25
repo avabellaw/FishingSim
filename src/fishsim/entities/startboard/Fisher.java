@@ -1,6 +1,5 @@
 package fishsim.entities.startboard;
 
-import engine.core.io.Logger;
 import engine.entity.Entity;
 import fishsim.board.Board;
 
@@ -22,10 +21,9 @@ public class Fisher extends Entity {
 	public void update() {
 		rod.update();
 	}
-	
+
 	@Override
 	public void render(int[] displayPixels, int displayWidth) {
-		// TODO Auto-generated method stub
 		super.render(displayPixels, displayWidth);
 		rod.render(displayPixels, displayWidth);
 	}

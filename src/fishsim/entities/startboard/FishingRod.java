@@ -3,6 +3,7 @@ package fishsim.entities.startboard;
 import java.awt.Color;
 
 import engine.entity.Entity;
+import fishsim.Main;
 import fishsim.board.Board;
 import fishsim.graphics.StaticSprites;
 
@@ -59,6 +60,8 @@ public class FishingRod extends Entity {
 		private double time, deltaTime = 0.03; // in seconds
 
 		private boolean hasHitWater = false;
+		
+		private final int WATER_LEVEL = 84;
 
 		public FishingHook(int x, int y) {
 			super(x, y, 4, 8, StaticSprites.hookSprite);
@@ -85,7 +88,7 @@ public class FishingRod extends Entity {
 		// }
 
 		public void update() {
-			if (y < 164 - height / 2 - 2) {
+			if (y < WATER_LEVEL + 1 - height / 2 - 2) {
 				x = (int) (startX - (xSpeed * time));
 				y = (int) (startY - ((ySpeed * time) - (0.5 * 9.8 * Math.pow(time, 2))));
 			} else {
@@ -100,11 +103,12 @@ public class FishingRod extends Entity {
 		}
 
 		private void splash() {
-			System.out.println("aksjdhfiajhdfkjn");
-			// for (int i = 0; i < display.pixels.length; i++) {
-			// int pixel = StaticSprites.splashSprite.getSprite()[i];
-			// display.pixels[i] = pixel;
-			// }
+			for (int i = 0; i < pixels.length; i++) {
+				int pixel = StaticSprites.splashSprite.getSprite()[i];
+				pixels[i] = pixel;
+			}
+			
+			Main.goToGame();
 		}
 
 	}
