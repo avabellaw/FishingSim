@@ -7,16 +7,10 @@ import fishsim.graphics.StaticSprites;
 
 public class EndMenu extends Menu {
 	
-	private int[] pixels;
-	
 	public EndMenu(Display d) {
 		super(d);
 		addMenuItem(new PlayAgain(StaticSprites.buttonSprite));
 		addMenuItem(new ExitButton(StaticSprites.buttonSprite));
-		
-		pixels = new int[screenWidth * screenHeight];
-		
-		for(int i = 0; i < pixels.length; i++) pixels[i] = 0xAF000000;
 	}
 
 	public void addMenuItem(MenuItem... items) {
@@ -29,11 +23,6 @@ public class EndMenu extends Menu {
 		}
 
 		menuItemCount++;
-	}
-
-	@Override
-	protected void renderBackground(int[] displayPixels, Display d) {
-		for(int i = 0; i < displayPixels.length; i++) displayPixels[i] = d.mixTwoColours(displayPixels[i], this.pixels[i]); 
 	}
 
 }

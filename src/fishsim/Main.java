@@ -48,6 +48,7 @@ public class Main extends Component {
 
 	public static void goToMenu() {
 		if (gameState == State.Game) {
+			GameDisplay.menu.init(display.pixels);
 			gameState = State.Menu;
 		}
 	}
