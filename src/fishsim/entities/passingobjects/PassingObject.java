@@ -27,7 +27,7 @@ public abstract class PassingObject extends Entity {
 		this.isVoid = true;
 
 		totalPassingObjects++;
-		GameBoard.addToTotalPossibleScore(points);
+		board.addToTotalPossibleScore(points);
 	}
 
 	protected void addSpeed(double speed) {

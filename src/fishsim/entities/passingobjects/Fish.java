@@ -12,7 +12,7 @@ public class Fish extends PassingObject {
 
 	@Override
 	protected void caughtByHook() {
-		GameBoard.addPoints(POINTS);
+		board.addPoints(POINTS);
 		removePassingObject();
 	}
 
