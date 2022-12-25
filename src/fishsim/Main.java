@@ -10,7 +10,6 @@ import fishsim.board.Board;
 import fishsim.board.GameBoard;
 import fishsim.board.StartBoard;
 import fishsim.graphics.GameDisplay;
-import fishsim.graphics.StaticSprites;
 
 public class Main extends Component {
 
@@ -21,7 +20,6 @@ public class Main extends Component {
 	public static GameDisplay display = new GameDisplay(DIMENSIONS, SCALE, "Fishing Simulator !");
 	public static Board board = new StartBoard(DIMENSIONS, display);
 
-	public static boolean splashFinished = false;
 	Ticker ticker = new Ticker(this, display, 100);
 
 	public enum State {
@@ -61,24 +59,24 @@ public class Main extends Component {
 					Thread.sleep(200);
 					board = new GameBoard(DIMENSIONS, display);
 					GameDisplay.drawScore = true;
-					Main.splashFinished = true;
+					gameState = State.Game;
 				} catch (InterruptedException e) {
 					Logger.error("Thread.sleep interupted when changing to game state");
 				}
 			};
 
 			new Thread(r1).start();
-		} else if(gameState == State.Menu) {
+		} else if (gameState == State.Menu) {
 			board = new GameBoard(DIMENSIONS, display);
 			((GameBoard) board).init();
 		}
-		
+
 		gameState = State.Game;
 	}
 
 	public void render() {
 		board.render();
-		//.render the buttons
+		// .render the buttons
 	}
 
 	public static void mouseClicked(Point mousePoint) {
