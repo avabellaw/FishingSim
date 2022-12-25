@@ -1,4 +1,4 @@
-package fishsim.entities;
+package fishsim.entities.menu;
 
 import engine.core.graphics.Menu;
 import engine.core.graphics.MenuItem;

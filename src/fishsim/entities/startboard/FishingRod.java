@@ -1,4 +1,4 @@
-package fishsim.entities;
+package fishsim.entities.startboard;
 
 import java.awt.Color;
 
