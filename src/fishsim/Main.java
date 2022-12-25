@@ -1,6 +1,7 @@
 package fishsim;
 
 import java.awt.Dimension;
+import java.awt.Point;
 
 import engine.core.Component;
 import engine.core.Ticker;
@@ -45,13 +46,13 @@ public class Main extends Component {
 	public void update() {
 		board.update();
 	}
-	
+
 	public static void goToMenu() {
-		if(gameState == State.Game) {
+		if (gameState == State.Game) {
 			gameState = State.Menu;
 		}
 	}
-	
+
 	public static void goToGame() {
 		if (gameState == State.Splash) {
 			Runnable r1 = () -> {
@@ -73,15 +74,10 @@ public class Main extends Component {
 	public void render() {
 		board.render();
 	}
-	
-	public static void mouseClicked() {
+
+	public static void mouseClicked(Point mousePoint) {
 		if (gameState == State.Menu) {
-			if (display.playAgainButtonClicked()) {
-				System.out.println("clicked");
-			}
-			if (display.exitButtonClicked()) {
-				Ticker.close();
-			}
+			GameDisplay.menu.click(mousePoint);
 		}
 	}
 

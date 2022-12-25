@@ -6,20 +6,18 @@ import java.util.NoSuchElementException;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import engine.core.graphics.Display;
-import engine.core.io.Logger;
 import engine.entity.Entity;
 import fishsim.Main;
 import fishsim.entities.FishingLine;
 import fishsim.entities.GameHook;
 import fishsim.entities.passingobjects.Fish;
 import fishsim.entities.passingobjects.PassingObject;
-import fishsim.graphics.GameDisplay;
 import fishsim.graphics.StaticSprites;
 
 public class GameBoard extends Board {
 
 	private int tempCounter = 1;
-	
+
 	public GameHook gHook;
 	public static FishingLine line;
 	private AtomicInteger aCounter = new AtomicInteger();
@@ -60,8 +58,9 @@ public class GameBoard extends Board {
 	}
 
 	public void update() {
-		if(Main.gameState == Main.State.Splash || Main.gameState == Main.State.Menu) return;
-		
+		if (Main.gameState == Main.State.Splash || Main.gameState == Main.State.Menu)
+			return;
+
 		super.update();
 
 		if (aCounter.incrementAndGet() >= addFishCoolOff + (objects.size() * 0.5)) {
@@ -69,18 +68,18 @@ public class GameBoard extends Board {
 			addNewObject();
 		}
 	}
-	
+
 	private void checkForObjects() {
 		boolean objectsExist = false;
-		
-		for(Entity entity : entities) { // Check to ensure it breaks out of loop onces found fish
-			if(entity instanceof PassingObject) {
+
+		for (Entity entity : entities) { // Check to ensure it breaks out of loop onces found fish
+			if (entity instanceof PassingObject) {
 				objectsExist = true;
 				break;
 			}
 		}
-		
-		if(!objectsExist) {
+
+		if (!objectsExist) {
 			Main.goToMenu();
 		}
 	}
@@ -89,7 +88,7 @@ public class GameBoard extends Board {
 		try {
 			entities.add(objects.pop());
 		} catch (NoSuchElementException e) {
-			//Logger.info("Tried to add new object but out of LinkedList is empty.");
+			// Logger.info("Tried to add new object but out of LinkedList is empty.");
 			checkForObjects();
 		}
 	}
@@ -145,11 +144,11 @@ public class GameBoard extends Board {
 	public static int getScore() {
 		return score;
 	}
-	
+
 	public static int getTotalPointsPossible() {
 		return totalPossibleScore;
 	}
-	
+
 	public static void addToTotalPossibleScore(int num) {
 		totalPossibleScore += num;
 	}

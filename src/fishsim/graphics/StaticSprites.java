@@ -41,6 +41,11 @@ public class StaticSprites {
 			Fish.ClownFish.WIDTH, Fish.ClownFish.HEIGHT, mainSpritesheet);
 	
 	// Buttons
-	public final static Sprite buttonSprite = new Sprite(0, pinkFishSprite.positionUnder(), GameDisplay.BUTTON_WIDTH,
-			GameDisplay.BUTTON_HEIGHT, mainSpritesheet);
+	public static final int BUTTON_WIDTH = 127, BUTTON_HEIGHT = 33;
+	public final static Sprite buttonSprite = new Sprite(0, pinkFishSprite.positionUnder(), BUTTON_WIDTH,
+			BUTTON_HEIGHT, mainSpritesheet);
+	public final static Sprite playAgainText = new Sprite(0, buttonSprite.positionUnder(),98,
+			15, mainSpritesheet);
+	public final static Sprite exitText = new Sprite(0, playAgainText.positionUnder(),35,
+			12, mainSpritesheet);
 }

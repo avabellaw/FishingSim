@@ -1,9 +1,9 @@
 package io;
 
+import java.awt.Point;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-import engine.core.Ticker;
 import fishsim.Main;
 import fishsim.graphics.GameDisplay;
 
@@ -40,6 +40,7 @@ public class MouseInput extends MouseAdapter {
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		Main.mouseClicked();
+		Point p = e.getPoint();
+		Main.mouseClicked(new Point(p.x / display.getScale(), p.y / display.getScale()));
 	}
 }

@@ -30,7 +30,7 @@ public class Fish extends PassingObject {
 		public final static int WIDTH = 19, HEIGHT = 18;
 
 		public YellowFish(GameBoard board) {
-			super(board, StaticSprites.yellowFishSprite, 4;
+			super(board, StaticSprites.yellowFishSprite, 4);
 			addSpeed(0.1);
 		}
 

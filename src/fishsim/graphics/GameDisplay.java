@@ -7,15 +7,15 @@ import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
-import java.awt.image.BufferedImage;
-import java.awt.image.DataBufferInt;
 
 import javax.swing.JPanel;
 
 import engine.core.graphics.Display;
+import engine.core.graphics.Menu;
 import engine.core.graphics.MenuItem;
 import fishsim.Main;
 import fishsim.board.GameBoard;
+import fishsim.entities.EndMenu;
 import io.MouseInput;
 
 public class GameDisplay extends Display {
@@ -27,14 +27,7 @@ public class GameDisplay extends Display {
 	private static Font font = new Font("Serif", Font.PLAIN, 25);
 	private static Font menuFont = new Font("Serif", Font.BOLD, 35);
 
-	private static BufferedImage menuBackground;
-
-	public static final int BUTTON_WIDTH = 170, BUTTON_HEIGHT = 45;
-
-	private MenuItem playAgain = new MenuItem.Button(this.getSize().width / 2 - (BUTTON_WIDTH / 2),
-			this.getSize().height / 3 + 45, BUTTON_WIDTH, BUTTON_HEIGHT, StaticSprites.buttonSprite);
-	private MenuItem exit = new MenuItem.Button(this.getSize().width / 2 - (BUTTON_WIDTH / 2),
-			playAgain.y + BUTTON_HEIGHT + 25, BUTTON_WIDTH, BUTTON_HEIGHT, StaticSprites.buttonSprite);
+	public static Menu menu;
 
 	JPanel panel = new JPanel();
 
@@ -42,11 +35,7 @@ public class GameDisplay extends Display {
 
 	public GameDisplay(Dimension dimensions, int scale, String title) {
 		super(dimensions, scale, title);
-
-		menuBackground = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
-		int[] pixels = ((DataBufferInt) menuBackground.getRaster().getDataBuffer()).getData();
-		for (int i = 0; i < pixels.length; i++)
-			pixels[i] = new Color(0f, 0f, 0f, 0.7f).getRGB();
+		menu = new EndMenu(dimensions.width, dimensions.height);
 
 		mouseInput = new MouseInput(this);
 		addMouseListener(mouseInput);
@@ -67,13 +56,15 @@ public class GameDisplay extends Display {
 			FontMetrics metrics = g.getFontMetrics(menuFont);
 			String[] str = { "You scored:\n", GameBoard.getScore() + "/" + GameBoard.getTotalPointsPossible() };
 
-			g2.drawImage(menuBackground, 0, 0, width * getScale(), height * getScale(), null);
+			g2.drawImage(menu.getImage(), 0, 0, width * getScale(), height * getScale(), null);
 			g2.setColor(Color.WHITE);
 			g2.setFont(menuFont);
 
 			int stringX = this.getSize().width / 2, stringY = this.getSize().height / 3 - 20;
 			g2.drawString(str[0], stringX - metrics.stringWidth(str[0]) / 2, stringY);
 			g2.drawString(str[1], stringX - metrics.stringWidth(str[1]) / 2, stringY + 40);
+
+			menu.render();
 		}
 
 		// if(!isMouseOnScreen) {
@@ -89,13 +80,4 @@ public class GameDisplay extends Display {
 		// metrics.stringWidth(message) / 2, (this.getSize().height) / 2);
 		// }
 	}
-
-	public boolean playAgainButtonClicked() {
-		return playAgain.isMouseInBounds(getMousePosition());
-	}
-
-	public boolean exitButtonClicked() {
-		return exit.isMouseInBounds(getMousePosition());
-	}
-
 }
