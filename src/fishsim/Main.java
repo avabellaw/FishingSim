@@ -21,25 +21,15 @@ public class Main extends Component {
 	public static Board board;
 
 	Ticker ticker = new Ticker(this, display, 100);
-
+	
 	public enum State {
 		Splash, Game, Menu
 	}
 
 	public static State gameState = State.Splash;
 
-	public Main(int args) {
-		super(args);
-	}
-
-	public static void main(String[] args) {
-		int logLevel = Logger.LIVE;
-
-		if (args.length > 0) {
-			logLevel = Integer.parseInt(args[0]);
-		}
-
-		new Main(logLevel);
+	public Main() {
+		super(Logger.Level.Live); // Set the log level
 	}
 
 	public void update() {
