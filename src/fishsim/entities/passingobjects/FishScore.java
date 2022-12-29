@@ -5,7 +5,6 @@ import java.awt.Color;
 import engine.entity.Entity;
 import engine.graphics.sprites.Sprite;
 import fishsim.Main;
-import fishsim.board.GameBoard;
 import fishsim.graphics.StaticSprites;
 
 public class FishScore extends Entity {
@@ -18,8 +17,9 @@ public class FishScore extends Entity {
 		super(0, 0, getSpriteFromNumber(points));
 		this.POINTS = points;
 		this.isVoid = true;
-		
-		if(POINTS > 100) changeColour(Color.RED);
+
+		if (POINTS > 100)
+			changeColour(Color.RED);
 	}
 
 	private static Sprite getSpriteFromNumber(int num) {
@@ -69,14 +69,16 @@ public class FishScore extends Entity {
 
 	private void changeColour(Color colour) {
 		for (int i = 0; i < pixels.length; i++) {
-			if(pixels[i] == 0xff000000) pixels[i] = colour.getRGB() + (i * 1000); // Rainbow effect
+			if (pixels[i] == 0xff000000)
+				pixels[i] = colour.getRGB() + (i * 1000); // Rainbow effect
 		}
 	}
 
-	public void showScore(GameBoard board, int x, int y) {
-		board.addPoints(POINTS);
-		this.x = x;
-		this.y = y;
+	public void showScore(PassingObject object) {
+		object.removePassingObject();
+		object.board.addPoints(POINTS);
+		this.x = object.x + (object.width / 2) - this.width / 2;
+		this.y = object.y + (object.height / 2) - this.height / 2;
 		isVoid = false;
 	}
 

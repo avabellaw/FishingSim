@@ -32,8 +32,6 @@ public abstract class PassingObject extends Entity {
 		board.entities.add(score);
 		totalPassingObjects++; // Need to move this into fish and rename
 		board.addToTotalPossibleScore(score.POINTS);
-
-		System.out.println("score: " + score.POINTS + ", instance number: " + ++instanceNumber);
 	}
 
 	public PassingObject(GameBoard board, Sprite sprite, FishScore score, int direction) {
@@ -72,13 +70,12 @@ public abstract class PassingObject extends Entity {
 	}
 
 	protected void caughtByHook() {
-		score.showScore(board, x, y);
-		removePassingObject();
+		score.showScore(this);
 	}
 
 	protected void removePassingObject() {
 		board.entities.remove(this);
-		Logger.info("Removed object: " + getClassName());
+		Logger.debug("Removed object: " + getClassName());
 	}
 
 	private int getRandomStartX() {
