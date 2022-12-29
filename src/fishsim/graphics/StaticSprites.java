@@ -48,4 +48,13 @@ public class StaticSprites {
 			15, mainSpritesheet);
 	public final static Sprite exitText = new Sprite(0, playAgainText.positionUnder(),35,
 			12, mainSpritesheet);
+	
+	// Number sprites for score
+	public final static Sprite[] numbersSprite = {numSprite(11), numSprite(9), numSprite(12), numSprite(12), numSprite(14), numSprite(12), numSprite(12), numSprite(12), numSprite(12), numSprite(12)};
+
+	static int previousWidth = 0;
+	public static Sprite numSprite(int width) {
+		previousWidth += width;
+		return new Sprite(previousWidth, 210, width, 15, mainSpritesheet);
+	}
 }

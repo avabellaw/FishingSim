@@ -28,18 +28,12 @@ public class Main extends Component {
 
 	public static State gameState = State.Splash;
 
-	public Main(int args) {
-		super(args);
+	public Main() {
+		super(Logger.Level.Info);
 	}
 
 	public static void main(String[] args) {
-		int logLevel = Logger.LIVE;
-
-		if (args.length > 0) {
-			logLevel = Integer.parseInt(args[0]);
-		}
-
-		new Main(logLevel);
+		new Main();
 	}
 
 	public void update() {

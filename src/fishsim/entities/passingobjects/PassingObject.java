@@ -16,6 +16,8 @@ public abstract class PassingObject extends Entity {
 
 	public final int POINTS;
 
+	private int direction = -1;
+
 	public static int totalPassingObjects = 0, totalPossibleScore = 0;
 
 	public PassingObject(GameBoard board, Sprite sprite, int points) {
@@ -29,6 +31,12 @@ public abstract class PassingObject extends Entity {
 		totalPassingObjects++;
 		board.addToTotalPossibleScore(points);
 	}
+	
+	public PassingObject(GameBoard board, Sprite sprite, int points, int direction) {
+		this(board, sprite, points);
+		
+		this.direction = direction;		
+	}
 
 	protected void addSpeed(double speed) {
 		this.speed += speed;
@@ -39,7 +47,7 @@ public abstract class PassingObject extends Entity {
 		delta += speed;
 
 		if (delta >= 1.0) {
-			y--;
+			y += direction;
 			delta--;
 		}
 
