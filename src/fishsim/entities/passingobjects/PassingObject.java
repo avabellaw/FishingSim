@@ -13,29 +13,33 @@ public abstract class PassingObject extends Entity {
 	protected GameHook hook;
 	protected GameBoard board;
 	protected int pointsWorth = 0;
+	private boolean caught = false;
 
-	public final int POINTS;
+	private FishScore score;
 
 	private int direction = -1;
 
 	public static int totalPassingObjects = 0, totalPossibleScore = 0;
 
-	public PassingObject(GameBoard board, Sprite sprite, int points) {
+	static int instanceNumber = 0;
+
+	public PassingObject(GameBoard board, Sprite sprite, FishScore score) {
 		super(board.BOARD_SIZE.width / 2, board.BOARD_SIZE.height, sprite);
-		this.POINTS = points;
 		this.board = board;
 		this.hook = board.gHook;
+		this.score = score;
 
-		this.isVoid = true;
+		board.entities.add(score);
+		totalPassingObjects++; // Need to move this into fish and rename
+		board.addToTotalPossibleScore(score.POINTS);
 
-		totalPassingObjects++;
-		board.addToTotalPossibleScore(points);
+		System.out.println("score: " + score.POINTS + ", instance number: " + ++instanceNumber);
 	}
-	
-	public PassingObject(GameBoard board, Sprite sprite, int points, int direction) {
-		this(board, sprite, points);
-		
-		this.direction = direction;		
+
+	public PassingObject(GameBoard board, Sprite sprite, FishScore score, int direction) {
+		this(board, sprite, score);
+
+		this.direction = direction;
 	}
 
 	protected void addSpeed(double speed) {
@@ -51,24 +55,30 @@ public abstract class PassingObject extends Entity {
 			delta--;
 		}
 
-		if (this.isTouching(hook) && MouseInput.isMouseOnScreen)
+		if (this.isTouching(hook) && MouseInput.isMouseOnScreen && !caught) {
+			caught = true;
 			caughtByHook();
+		}
 
-		if (this.y + height < 0) {
+		if (direction < 0 ? this.y + height < 0 : this.y > board.BOARD_SIZE.height) {
 			removePassingObject();
 		}
+
+		score.update();
 	}
 
-	public void initialise() {
+	public void setRandomStartX() {
 		x = getRandomStartX();
-		isVoid = false;
 	}
 
-	protected abstract void caughtByHook();
+	protected void caughtByHook() {
+		score.showScore(board, x, y);
+		removePassingObject();
+	}
 
 	protected void removePassingObject() {
 		board.entities.remove(this);
-		Logger.debug("Removed object: " + getClassName());
+		Logger.info("Removed object: " + getClassName());
 	}
 
 	private int getRandomStartX() {

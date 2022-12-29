@@ -1,5 +1,6 @@
 package fishsim.graphics;
 
+import java.awt.Color;
 import java.awt.Dimension;
 
 import engine.graphics.sprites.Sprite;
@@ -50,11 +51,12 @@ public class StaticSprites {
 			12, mainSpritesheet);
 	
 	// Number sprites for score
-	public final static Sprite[] numbersSprite = {numSprite(11), numSprite(9), numSprite(12), numSprite(12), numSprite(14), numSprite(12), numSprite(12), numSprite(12), numSprite(12), numSprite(12)};
+	public final static Sprite[] numbersSprite = {numSprite(12), numSprite(9), numSprite(12), numSprite(12), numSprite(14), numSprite(12), numSprite(12), numSprite(12), numSprite(12), numSprite(12)};
 
 	static int previousWidth = 0;
 	public static Sprite numSprite(int width) {
+		Sprite s = new Sprite(previousWidth, 210, width, 15, mainSpritesheet);
 		previousWidth += width;
-		return new Sprite(previousWidth, 210, width, 15, mainSpritesheet);
+		return s; 
 	}
 }

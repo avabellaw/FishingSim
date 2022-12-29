@@ -1,41 +1,70 @@
 package fishsim.entities.passingobjects;
 
+import engine.entity.Entity;
 import engine.graphics.sprites.Sprite;
+import fishsim.Main;
 import fishsim.board.GameBoard;
 import fishsim.graphics.StaticSprites;
 
-public class FishScore extends PassingObject {
+public class FishScore extends Entity {
 
-	private int[] pixels;
-	private int spriteWidth = 0, spriteHeight = 15;
+	private final static int SPRITE_HEIGHT = 15;
+	public final int POINTS;
 
 	// Score entity created from the fish points when caught
-	public FishScore(GameBoard board, Sprite sprite, int points, int direction) {
-		super(board, sprite, points, 1);
+	public FishScore(int points) {
+		super(0, 0, getSpriteFromNumber(points));
+		this.POINTS = points;
+		this.isVoid = true;
 	}
 
-	public void getSpriteFromNumber(int num) {
+	private static Sprite getSpriteFromNumber(int num) {
+		int spriteWidth = 0;
+		int[] pixels;
 		String numAsStr = "" + num;
 
 		Sprite[] sprites = new Sprite[numAsStr.length()];
 
 		int spriteIndex = 0;
 
-		spriteWidth += sprites[spriteIndex].getWidth();
 		for (char character : numAsStr.toCharArray()) {
-			sprites[spriteIndex++] = StaticSprites.numbersSprite[Integer.parseInt(String.valueOf(character))];
+			int numberSprite = Integer.parseInt(String.valueOf(character));
+			sprites[spriteIndex] = StaticSprites.numbersSprite[numberSprite];
+			spriteWidth += sprites[spriteIndex].getWidth();
+			spriteIndex++;
+		}
+		spriteWidth++; // Increase pixels size to accomodate for gap
+
+		pixels = new int[spriteWidth * SPRITE_HEIGHT + SPRITE_HEIGHT];
+
+		int xOffSet = 0;
+		for (Sprite sprite : sprites) {
+			for(int y = 0; y < sprite.getHeight(); y++) {
+				for(int x = 0; x < sprite.getWidth(); x++) {
+					pixels[x + xOffSet + y * (spriteWidth)] = sprite.getSprite()[x + y * sprite.getWidth()];
+				}
+			}
+
+			xOffSet += sprite.getWidth() + 1; // Put in gap
 		}
 
-		pixels = new int[spriteWidth * spriteHeight];
-		
-		for(Sprite sprite : sprites) {
-			pixels += sprite.getSprite();
-		}
+		return new Sprite(spriteWidth, SPRITE_HEIGHT, pixels);
 	}
 
-	@Override
-	protected void caughtByHook() {
-		// Not caught by hook it's void
+	public void update() {
+		if (isVoid)
+			return;
+		
+		y-=2;
+		
+		if(y + height < 0) Main.board.entities.remove(this);
+	}
+
+	public void showScore(GameBoard board, int x, int y) {
+		board.addPoints(POINTS);
+		this.x = x;
+		this.y = y;
+		isVoid = false;
 	}
 
 }

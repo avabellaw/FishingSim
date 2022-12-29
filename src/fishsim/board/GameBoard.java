@@ -10,6 +10,7 @@ import engine.entity.Entity;
 import fishsim.Main;
 import fishsim.entities.GameHook;
 import fishsim.entities.passingobjects.Fish;
+import fishsim.entities.passingobjects.FishScore;
 import fishsim.entities.passingobjects.PassingObject;
 import fishsim.entities.startboard.FishingLine;
 import fishsim.graphics.StaticSprites;
@@ -20,7 +21,7 @@ public class GameBoard extends Board {
 	public static FishingLine line;
 	private AtomicInteger aCounter = new AtomicInteger();
 	private int score = 0, totalPossibleScore = 0;
-	private static int addFishCoolOff = 12, fishAmount = 2;
+	private static int addFishCoolOff = 12, fishAmount = 200;
 	private LinkedList<PassingObject> objects = new LinkedList<PassingObject>();
 
 	public Boundaries boundaries;
@@ -34,7 +35,7 @@ public class GameBoard extends Board {
 		entities.add(gHook);
 		line = new FishingLine(gHook);
 		entities.add(line);
-
+		
 		init();
 	}
 
@@ -151,7 +152,7 @@ public class GameBoard extends Board {
 			default:
 				fish = new Fish.ZebraFish(this);
 			}
-			fish.initialise();
+			fish.setRandomStartX();
 			objects.push(fish);
 		}
 	}
