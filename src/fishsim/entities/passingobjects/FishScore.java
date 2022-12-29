@@ -1,5 +1,7 @@
 package fishsim.entities.passingobjects;
 
+import java.awt.Color;
+
 import engine.entity.Entity;
 import engine.graphics.sprites.Sprite;
 import fishsim.Main;
@@ -16,6 +18,8 @@ public class FishScore extends Entity {
 		super(0, 0, getSpriteFromNumber(points));
 		this.POINTS = points;
 		this.isVoid = true;
+		
+		if(POINTS > 100) changeColour(Color.RED);
 	}
 
 	private static Sprite getSpriteFromNumber(int num) {
@@ -39,9 +43,11 @@ public class FishScore extends Entity {
 
 		int xOffSet = 0;
 		for (Sprite sprite : sprites) {
-			for(int y = 0; y < sprite.getHeight(); y++) {
-				for(int x = 0; x < sprite.getWidth(); x++) {
-					pixels[x + xOffSet + y * (spriteWidth)] = sprite.getSprite()[x + y * sprite.getWidth()];
+			for (int y = 0; y < sprite.getHeight(); y++) {
+				for (int x = 0; x < sprite.getWidth(); x++) {
+					int pixel = sprite.getSprite()[x + y * sprite.getWidth()];
+
+					pixels[x + xOffSet + y * (spriteWidth)] = pixel;
 				}
 			}
 
@@ -54,10 +60,17 @@ public class FishScore extends Entity {
 	public void update() {
 		if (isVoid)
 			return;
-		
-		y-=2;
-		
-		if(y + height < 0) Main.board.entities.remove(this);
+
+		y -= 2;
+
+		if (y + height < 0)
+			Main.board.entities.remove(this);
+	}
+
+	private void changeColour(Color colour) {
+		for (int i = 0; i < pixels.length; i++) {
+			if(pixels[i] == 0xff000000) pixels[i] = colour.getRGB() + (i * 1000); // Rainbow effect
+		}
 	}
 
 	public void showScore(GameBoard board, int x, int y) {
