@@ -26,9 +26,9 @@ public class StaticSprites {
 	// res/sprites/BoardBlueprint.png
 	private static final int BOARD_WIDTH = Main.DIMENSIONS.width, BOARD_HEIGHT = Main.DIMENSIONS.height;
 	public static final Spritesheet blueprintSpritesheet = new Spritesheet("res/sprites/BoardBlueprint.png",
-			BOARD_WIDTH * 2, BOARD_HEIGHT);
+			400, 400);
 	public static final Sprite blueprintSprite = new Sprite(0, 0, BOARD_WIDTH, BOARD_HEIGHT, blueprintSpritesheet);
-	public static final Sprite gameBlueprintSprite = new Sprite(BOARD_WIDTH/* offset */, 0, BOARD_WIDTH, BOARD_HEIGHT,
+	public static final Sprite gameBlueprintSprite = new Sprite(BOARD_WIDTH/* offset */, 0, BOARD_WIDTH, 400,
 			blueprintSpritesheet);
 
 	// Fish

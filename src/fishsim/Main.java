@@ -54,6 +54,7 @@ public class Main extends Component {
 					Thread.sleep(200);
 					board = new GameBoard(DIMENSIONS, display);
 					GameDisplay.drawScore = true;
+					board.render();
 					gameState = State.Game;
 				} catch (InterruptedException e) {
 					Logger.error("Thread.sleep interupted when changing to game state");
@@ -65,8 +66,6 @@ public class Main extends Component {
 			board = new GameBoard(DIMENSIONS, display);
 			((GameBoard) board).init();
 		}
-
-		gameState = State.Game;
 	}
 
 	public void render() {

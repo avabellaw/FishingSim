@@ -10,7 +10,6 @@ import engine.entity.Entity;
 import fishsim.Main;
 import fishsim.entities.GameHook;
 import fishsim.entities.passingobjects.Fish;
-import fishsim.entities.passingobjects.FishScore;
 import fishsim.entities.passingobjects.PassingObject;
 import fishsim.entities.startboard.FishingLine;
 import fishsim.graphics.StaticSprites;
@@ -29,13 +28,13 @@ public class GameBoard extends Board {
 	public GameBoard(Dimension boardSize, Display display) {
 		super(boardSize, display, StaticSprites.gameBlueprintSprite);
 		this.display = display;
-		boundaries = new Boundaries(9, 9, 0, 0);
+		boundaries = new Boundaries(12, 12, 0, 0);
 
 		gHook = new GameHook(this, (BOARD_SIZE.width / 2) - GameHook.WIDTH / 2, BOARD_SIZE.height - GameHook.HEIGHT);
 		entities.add(gHook);
 		line = new FishingLine(gHook);
 		entities.add(line);
-		
+
 		init();
 	}
 
@@ -135,7 +134,7 @@ public class GameBoard extends Board {
 	public void addToTotalPossibleScore(int num) {
 		totalPossibleScore += num;
 	}
-	
+
 	public void init() {
 		for (int i = 0; i < fishAmount; i++) {
 			Fish fish;
