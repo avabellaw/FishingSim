@@ -19,27 +19,34 @@ public class FishScore extends Entity {
 		this.isVoid = true;
 
 		if (POINTS > 100)
-			changeColour(Color.RED);
+			changeColour(Color.RED, true);
+		if(POINTS < 0)
+			changeColour(Color.RED, false);
 	}
 
 	private static Sprite getSpriteFromNumber(int num) {
 		int spriteWidth = 0;
 		int[] pixels;
 		String numAsStr = "" + num;
-
+		
+		int gaps = numAsStr.length() -1;
 		Sprite[] sprites = new Sprite[numAsStr.length()];
 
 		int spriteIndex = 0;
 
 		for (char character : numAsStr.toCharArray()) {
-			int numberSprite = Integer.parseInt(String.valueOf(character));
-			sprites[spriteIndex] = StaticSprites.numbersSprite[numberSprite];
+			if (character == '-') {  
+				sprites[spriteIndex] = StaticSprites.numbersSprite[10];
+			}else {
+				int numberSprite = Integer.parseInt(String.valueOf(character));
+				sprites[spriteIndex] = StaticSprites.numbersSprite[numberSprite];
+			}
 			spriteWidth += sprites[spriteIndex].getWidth();
 			spriteIndex++;
 		}
-		spriteWidth++; // Increase pixels size to accomodate for gap
+		spriteWidth+=gaps; // Increase pixels size to accomodate for gap
 
-		pixels = new int[spriteWidth * SPRITE_HEIGHT + SPRITE_HEIGHT];
+		pixels = new int[(spriteWidth) * SPRITE_HEIGHT + SPRITE_HEIGHT ];
 
 		int xOffSet = 0;
 		for (Sprite sprite : sprites) {
@@ -61,16 +68,16 @@ public class FishScore extends Entity {
 		if (isVoid)
 			return;
 
-		y -= 2;
+		y -= 1;
 
 		if (y + height < 0)
 			Main.board.entities.remove(this);
 	}
 
-	private void changeColour(Color colour) {
+	private void changeColour(Color colour, boolean rainbow) {
 		for (int i = 0; i < pixels.length; i++) {
 			if (pixels[i] == 0xff000000)
-				pixels[i] = colour.getRGB() + (i * 1000); // Rainbow effect
+				pixels[i] = colour.getRGB() + (rainbow ? (i * 1000) : 0); // Rainbow effect
 		}
 	}
 

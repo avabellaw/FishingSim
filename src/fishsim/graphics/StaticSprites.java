@@ -41,6 +41,10 @@ public class StaticSprites {
 	public final static Sprite clownFishSprite = new Sprite(0, zebraFishSprite.positionAbove(Fish.ClownFish.HEIGHT),
 			Fish.ClownFish.WIDTH, Fish.ClownFish.HEIGHT, mainSpritesheet);
 	
+	// Passing Objects
+	static final Dimension boot = new Dimension(35, 57);
+	public static final Sprite bootSprite = new Sprite(0, clownFishSprite.positionAbove(boot.height), boot, mainSpritesheet);
+	
 	// Buttons
 	public static final int BUTTON_WIDTH = 127, BUTTON_HEIGHT = 33;
 	public final static Sprite buttonSprite = new Sprite(0, pinkFishSprite.positionUnder(), BUTTON_WIDTH,
@@ -51,10 +55,10 @@ public class StaticSprites {
 			12, mainSpritesheet);
 	
 	// Number sprites for score
-	public final static Sprite[] numbersSprite = {numSprite(12), numSprite(9), numSprite(12), numSprite(12), numSprite(14), numSprite(12), numSprite(12), numSprite(12), numSprite(12), numSprite(12)};
+	public final static Sprite[] numbersSprite = {numSprite(12), numSprite(9), numSprite(12), numSprite(12), numSprite(14), numSprite(12), numSprite(12), numSprite(12), numSprite(12), numSprite(12), numSprite(6)};
 
 	static int previousWidth = 0;
-	public static Sprite numSprite(int width) {
+	static Sprite numSprite(int width) {
 		Sprite s = new Sprite(previousWidth, 210, width, 15, mainSpritesheet);
 		previousWidth += width;
 		return s; 

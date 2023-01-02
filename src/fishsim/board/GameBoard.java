@@ -9,6 +9,7 @@ import engine.core.graphics.Display;
 import engine.entity.Entity;
 import fishsim.Main;
 import fishsim.entities.GameHook;
+import fishsim.entities.passingobjects.Boot;
 import fishsim.entities.passingobjects.Fish;
 import fishsim.entities.passingobjects.PassingObject;
 import fishsim.entities.startboard.FishingLine;
@@ -137,22 +138,24 @@ public class GameBoard extends Board {
 
 	public void init() {
 		for (int i = 0; i < fishAmount; i++) {
-			Fish fish;
-			switch ((int) (Math.random() * 4)) {
+			PassingObject po;
+			switch ((int) (Math.random() * 5)) {
 			case 0:
-				fish = new Fish.YellowFish(this);
+				po = new Fish.YellowFish(this);
 				break;
 			case 1:
-				fish = new Fish.PinkFish(this);
+				po = new Fish.PinkFish(this);
 				break;
 			case 2:
-				fish = new Fish.ClownFish(this);
+				po = new Fish.ClownFish(this);
 				break;
+			case 3:
+				po = new Fish.ZebraFish(this);
 			default:
-				fish = new Fish.ZebraFish(this);
+				po = new Boot(this);
 			}
-			fish.setRandomStartX();
-			objects.push(fish);
+			po.setRandomStartX();
+			objects.push(po);
 		}
 	}
 
